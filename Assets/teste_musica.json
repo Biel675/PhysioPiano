@@ -1,0 +1,15 @@
+{
+    "bpm": 90,
+    "ticks": [
+        { "cmd": ["on:A1"] },
+        { "cmd": ["on:A2", "on:C1"] },
+        { "cmd": ["off:A1", "off:C1"] },
+        { "cmd": ["off:A2", "on:G1"] },
+        { "cmd": ["off:G1"] },
+        { "cmd": [] },
+        { "cmd": [] },
+        { "cmd": ["on:F3", "on:D2"] },
+        { "cmd": ["off:D2"] },
+        { "cmd": ["off:F3"] }
+    ]
+}
