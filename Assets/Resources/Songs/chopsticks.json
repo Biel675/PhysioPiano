@@ -1,4 +1,5 @@
 {
+    "name": "Chopsticks",
     "bpm": 95,
     "ticks": [
         { "cmd": ["on:F4", "on:G4"] },

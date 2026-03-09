@@ -1,4 +1,5 @@
 {
+    "name": "Twinkle Twinkle Little Star",
     "bpm": 95,
     "ticks": [
         { "cmd": ["on:C4"] },

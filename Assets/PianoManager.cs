@@ -1,14 +1,19 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PianoManager : MonoBehaviour
 {
+    public const string MENUS_SCENE_NAME = "Menus Scene";
     private Dictionary<string, PianoKey> keysMap = new Dictionary<string, PianoKey>();
-    private float secondsPerTick;
-    private float timer;
-    private Queue<TickData> ticks = null;
+    private static float SecondsPerTick { get; set; }
+    private static float Timer { get; set; }
+    private static Queue<TickData> Ticks { get; set; } = null;
+
+    private const string CMD_ON = "on"; // right hand is default
+    private const string CMD_ON_LEFT = "on_left";
+    private const string CMD_OFF = "off";
 
     void Awake()
     {
@@ -25,62 +30,72 @@ public class PianoManager : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime;
-
-        if (ticks != null && ticks.Count > 0 && timer >= secondsPerTick)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            TickData tick = ticks.Dequeue();
-            foreach (string command in tick.cmd)
-            {
-                string[] parts = command.Split(":");
-                string action = parts[0];
-                string keyName = parts[1];
+            SceneManager.LoadScene(MENUS_SCENE_NAME);
+        }
 
-                if (!keysMap.ContainsKey(keyName))
-                {
-                    Debug.LogError($"Tecla nao identificada: {keyName}");
+
+
+        if (Ticks == null)
+        {
+            return;
+        }
+
+        Timer += Time.deltaTime;
+
+        if (Ticks.Count == 0)
+        {
+            Ticks = null;
+            return;
+        }
+
+        if (Timer < SecondsPerTick)
+        {
+            return;
+        }
+
+        TickData tick = Ticks.Dequeue();
+        foreach (string command in tick.cmd)
+        {
+            string[] parts = command.Split(":");
+            string action = parts[0];
+            string keyName = parts[1];
+
+            if (!keysMap.TryGetValue(keyName, out PianoKey key))
+            {
+                Debug.LogError($"Tecla nao identificada: {keyName}");
                     return;
-                }
-                PianoKey key = keysMap[keyName];
-
-                if (action == "on")
-                {
-                    key.State = "tutorial";
-                }
-                else if (action == "on_left")
-                {
-                    key.State = "tutorial_left";
-                }
-                else if (action == "off")
-                {
-                    key.StopKey();
-                }
-                else
-                {
-                    Debug.LogError($"Comando nao especificado: {action}");
-                }
             }
 
-            timer -= secondsPerTick;
-        }
-        else if (ticks != null && ticks.Count == 0)
-        {
-            ticks = null;
-        }
-        else if (Input.GetKey(KeyCode.K))
-        {
-            string jsonString = File.ReadAllText("Assets/chopsticks_two_hands.json");
-            SongData songData = JsonUtility.FromJson<SongData>(jsonString);
-
-            float beatsPerMinute = songData.bpm;
-            secondsPerTick = 60 / beatsPerMinute;
-            if (songData.ticks != null)
+            switch (action)
             {
-                ticks = new Queue<TickData>(songData.ticks);
+                case CMD_ON:
+                    key.State = "tutorial";
+                    break;
+                case CMD_ON_LEFT:
+                    key.State = "tutorial_left";
+                    break;
+                case CMD_OFF:
+                    key.StopKey();
+                    break;
+                default:
+                    Debug.LogError($"Comando nao especificado: {action}");
+                    break;
             }
-            timer = 0f;
-
-            Debug.Log($"Carregando musica com {beatsPerMinute} bpm e {ticks.Count} ticks");
         }
+
+        Timer -= SecondsPerTick;
+    }
+
+    public static void LoadSong(SongData song)
+    {
+        float bpm = song.bpm;
+
+        SecondsPerTick = 60 / bpm;
+        Timer = 0f;
+        Ticks = new Queue<TickData>(song.ticks);
+
+        Debug.Log($"Carregando musica com {bpm} bpm e {song.ticks.Count} ticks");
     }
 }

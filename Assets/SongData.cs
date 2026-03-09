@@ -5,6 +5,7 @@ using System.Collections.Generic;
 [Serializable]
 public class SongData
 {
+    public string name;
     public float bpm;
     public List<TickData> ticks;
 }

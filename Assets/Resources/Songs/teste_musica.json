@@ -1,4 +1,5 @@
 {
+    "name": "Teste",
     "bpm": 90,
     "ticks": [
         { "cmd": ["on:A1"] },
