@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
     public const string PIANO_SCENE_NAME = "Piano Scene";
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject selectSongMenu;
+    [SerializeField] private GameObject selectPianoMenu;
 
     [SerializeField] private Transform selectSongScrollViewContent;
 
@@ -18,6 +19,7 @@ public class MainMenu : MonoBehaviour
     {
         mainMenu.SetActive(true);
         selectSongMenu.SetActive(false);
+        selectPianoMenu.SetActive(false);
     }
 
     private void CreateSongButtons()
@@ -54,6 +56,26 @@ public class MainMenu : MonoBehaviour
     {
         mainMenu.SetActive(false);
         selectSongMenu.SetActive(true);
+    }
+
+    public void OnClickSelectPiano()
+    {
+        mainMenu.SetActive(false);
+        selectPianoMenu.SetActive(true);
+    }
+
+    public void OnClickSelectFullPiano()
+    {
+        PianoManager.CurrentPiano = "Full";
+        selectPianoMenu.SetActive(false);
+        mainMenu.SetActive(true);
+    }
+
+    public void OnClickSelecctReducedPiano()
+    {
+        PianoManager.CurrentPiano = "Reduced";
+        selectPianoMenu.SetActive(false);
+        mainMenu.SetActive(true);
     }
 
     public void OnClickQuit()

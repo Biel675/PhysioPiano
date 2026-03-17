@@ -229,10 +229,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &26405800
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,10 +371,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &60028558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,10 +392,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &88427135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,10 +413,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &95904410
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,10 +568,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &95904414
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -898,10 +903,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &178876615
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1185,10 +1191,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &189687059
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1389,10 +1396,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &229226288
 GameObject:
   m_ObjectHideFlags: 0
@@ -1685,10 +1693,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &294550988
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1806,10 +1815,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &298656895
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,10 +1868,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &310441007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1878,10 +1889,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &310995982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1898,10 +1910,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &328157793
 GameObject:
   m_ObjectHideFlags: 0
@@ -1954,10 +1967,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &345060966
 GameObject:
   m_ObjectHideFlags: 0
@@ -2298,10 +2312,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &464374301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2318,10 +2333,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &476427491
 GameObject:
   m_ObjectHideFlags: 0
@@ -2424,10 +2440,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &526920153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2444,10 +2461,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &530941158
 GameObject:
   m_ObjectHideFlags: 0
@@ -2694,10 +2712,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &531283176
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2949,10 +2968,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &537260690
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3102,10 +3122,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &560542593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3122,10 +3143,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &577976641
 GameObject:
   m_ObjectHideFlags: 0
@@ -3292,10 +3314,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &650760315
 GameObject:
   m_ObjectHideFlags: 0
@@ -3559,10 +3582,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &659986979
 GameObject:
   m_ObjectHideFlags: 0
@@ -3713,10 +3737,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &659986983
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3834,10 +3859,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &686889069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3854,10 +3880,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1001 &703545291
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4069,10 +4096,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &713058346
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4190,10 +4218,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &727124359
 GameObject:
   m_ObjectHideFlags: 0
@@ -4402,10 +4431,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &790489663
 GameObject:
   m_ObjectHideFlags: 0
@@ -4454,10 +4484,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &819435645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4474,10 +4505,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &823630979
 GameObject:
   m_ObjectHideFlags: 0
@@ -4526,10 +4558,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &855929040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4546,10 +4579,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &856810287
 GameObject:
   m_ObjectHideFlags: 0
@@ -4700,10 +4734,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &856810291
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4955,10 +4990,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &880846676
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5076,10 +5112,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &882988253
 GameObject:
   m_ObjectHideFlags: 0
@@ -5339,10 +5376,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &925026350
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5840,10 +5878,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &997529121
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5993,10 +6032,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &1030179762
 GameObject:
   m_ObjectHideFlags: 0
@@ -6045,10 +6085,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &1086547018
 GameObject:
   m_ObjectHideFlags: 0
@@ -6199,10 +6240,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &1086547022
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6550,10 +6592,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &1115341740
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6802,10 +6845,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &1147983094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6822,10 +6866,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &1150712088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6842,10 +6887,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &1157185076
 GameObject:
   m_ObjectHideFlags: 0
@@ -6855,6 +6901,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1157185077}
+  - component: {fileID: 1157185078}
   m_Layer: 0
   m_Name: Reduced Piano
   m_TagString: Untagged
@@ -6880,6 +6927,20 @@ Transform:
   - {fileID: 105636717}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1157185078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157185076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed159412ba08804888dfab11534ef18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullPiano: {fileID: 919132147842804158}
+  reducedPiano: {fileID: 1157185076}
 --- !u!1 &1165239325
 GameObject:
   m_ObjectHideFlags: 0
@@ -7030,10 +7091,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &1165239329
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7317,10 +7379,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &1181607952
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7438,10 +7501,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &1204330806
 GameObject:
   m_ObjectHideFlags: 0
@@ -7769,10 +7833,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &1258270677
 GameObject:
   m_ObjectHideFlags: 0
@@ -7919,10 +7984,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1001 &1320262550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8134,10 +8200,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &1345332619
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8389,10 +8456,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &1369384960
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8510,10 +8578,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &1377699428
 GameObject:
   m_ObjectHideFlags: 0
@@ -8664,10 +8733,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &1377699432
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9175,10 +9245,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &1429975823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9195,10 +9266,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &1445848935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9215,10 +9287,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &1470795208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9235,10 +9308,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &1486754184
 GameObject:
   m_ObjectHideFlags: 0
@@ -9287,10 +9361,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &1511300459
 GameObject:
   m_ObjectHideFlags: 0
@@ -9441,10 +9516,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &1511300463
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9703,10 +9779,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &1609660298
 GameObject:
   m_ObjectHideFlags: 0
@@ -9883,10 +9960,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &1672454979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9903,10 +9981,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &1681560256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9923,10 +10002,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &1695468026
 GameObject:
   m_ObjectHideFlags: 0
@@ -10039,10 +10119,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &1726626161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10059,10 +10140,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &1727649145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10079,10 +10161,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &1738480918
 GameObject:
   m_ObjectHideFlags: 0
@@ -10361,10 +10444,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &1747660855
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10482,10 +10566,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &1878412598
 GameObject:
   m_ObjectHideFlags: 0
@@ -10713,10 +10798,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &1930016172
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10968,10 +11054,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &1930442385
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11362,10 +11449,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &2029498784
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11515,10 +11603,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &2046988195
 GameObject:
   m_ObjectHideFlags: 0
@@ -11708,10 +11797,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &2141639018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11728,10 +11818,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &33802824363551248
 GameObject:
   m_ObjectHideFlags: 0
@@ -12934,6 +13025,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed159412ba08804888dfab11534ef18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fullPiano: {fileID: 919132147842804158}
+  reducedPiano: {fileID: 1157185076}
 --- !u!23 &932558211179032671
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17486,10 +17579,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &4524270404799012180
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18524,10 +18618,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &5311076611867592464
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19594,10 +19689,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &5879222980691389858
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21252,10 +21348,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &6423009426278257536
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22319,10 +22416,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &6806475260865734517
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23947,10 +24045,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &7375375675433144423
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24295,10 +24394,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &7391749802442746250
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25037,10 +25137,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &7492340552236845030
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25808,10 +25909,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &7653402599983262769
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26010,10 +26112,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &7695844047327350310
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26220,10 +26323,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &7699812572322069519
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26407,10 +26511,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &7713181585516688074
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26603,10 +26708,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &7753520152835225953
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26813,10 +26919,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &7779557539935670168
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27321,10 +27428,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &7916768171467388479
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27580,10 +27688,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &8056094892583416388
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27943,10 +28052,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &8116698559897863906
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28351,10 +28461,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &8152945179311570274
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28720,10 +28831,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &8293465766604841862
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29090,10 +29202,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &8310070581561782059
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29493,10 +29606,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &8339963537588321180
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29673,10 +29787,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &8341988524593800172
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30065,10 +30180,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &8449743223757793552
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30245,10 +30361,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &8455234145052842687
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30608,10 +30725,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &8485808400915751913
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31220,10 +31338,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &8510829926641984445
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31774,10 +31893,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &8581080272489996365
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31961,10 +32081,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &8612758490629470248
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32171,10 +32292,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &8697785061622437180
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32694,10 +32816,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &8737161952675757531
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33194,10 +33317,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &8848594599203378134
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33892,10 +34016,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &9079033265048670746
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34080,10 +34205,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &9119580867325784229
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34253,10 +34379,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &9138301917297768063
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34732,10 +34859,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &9180065883736577238
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34950,10 +35078,11 @@ MonoBehaviour:
   maxAngle: 5
   rotationSpeed: 15
   isBeingPressed: 0
-  pianoKey: 
+  keyNotation: 
   noteSound: {fileID: 0}
   pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
+  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!65 &9217670675366285658
 BoxCollider:
   m_ObjectHideFlags: 0

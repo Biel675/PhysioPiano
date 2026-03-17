@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEditor.Rendering;
+using System.Xml;
 
 public class PianoManager : MonoBehaviour
 {
@@ -15,8 +17,23 @@ public class PianoManager : MonoBehaviour
     private const string CMD_ON_LEFT = "on_left";
     private const string CMD_OFF = "off";
 
+    [SerializeField] private GameObject fullPiano;
+    [SerializeField] private GameObject reducedPiano;
+    public static string CurrentPiano { get; set; } = "Full";
+
     void Awake()
     {
+        if (CurrentPiano == "Full")
+        {
+            fullPiano.SetActive(true);
+            reducedPiano.SetActive(false);
+        }
+        else
+        {
+            fullPiano.SetActive(false);
+            reducedPiano.SetActive(true);
+        }
+        
         PianoKey[] keys = GetComponentsInChildren<PianoKey>();
 
         foreach (PianoKey key in keys)
