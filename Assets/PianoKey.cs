@@ -96,6 +96,10 @@ public class PianoKey : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        FingerHapticData fingerData = other.GetComponent<FingerHapticData>();
+        if (fingerData == null || fingerData.pressedKey != null) return;
+        fingerData.pressedKey = keyNotation;
+
         isBeingPressed = true;
 
         objectRenderer.material.color = pressedColor;
@@ -109,7 +113,7 @@ public class PianoKey : MonoBehaviour
         isBeingPressed = true;
 
         FingerHapticData fingerData = other.GetComponent<FingerHapticData>();
-        if (fingerData == null) return;
+        if (fingerData == null || fingerData.pressedKey != keyNotation) return;
 
         Vector3 localFingerPosition = transform.InverseTransformPoint(other.transform.position);
 
@@ -134,14 +138,16 @@ public class PianoKey : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        isBeingPressed = false;
-
         FingerHapticData fingerData = other.GetComponent<FingerHapticData>();
         if (fingerData == null)
         {
             Debug.LogWarning("Erro na FingerData");
             return;
         }
+        fingerData.pressedKey = null;
+
+        isBeingPressed = false;
+
         PositionType posType = fingerData.isLeftHand ? PositionType.GloveL : PositionType.GloveR;
         BhapticsPhysicsGlove.Instance.SendExitHaptic(posType, fingerData.fingerIndex);  
         
