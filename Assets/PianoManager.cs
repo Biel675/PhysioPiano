@@ -9,9 +9,9 @@ public class PianoManager : MonoBehaviour
 {
     public const string MENUS_SCENE_NAME = "Menus Scene";
     private Dictionary<string, PianoKey> keysMap = new Dictionary<string, PianoKey>();
-    private static float SecondsPerTick { get; set; }
+    public static string Mode { get; set; }
+    private static SongData CurrentSong { get; set; }
     private static float Timer { get; set; }
-    private static Queue<TickData> Ticks { get; set; } = null;
 
     private const string CMD_ON = "on"; // right hand is default
     private const string CMD_ON_LEFT = "on_left";
@@ -52,27 +52,26 @@ public class PianoManager : MonoBehaviour
             SceneManager.LoadScene(MENUS_SCENE_NAME);
         }
 
-
-
-        if (Ticks == null)
+        if (Mode != "tutorial" && Mode != "guided")
         {
+            return;
+        }
+
+        if (CurrentSong == null)
+        {
+            Mode = "";
             return;
         }
 
         Timer += Time.deltaTime;
 
-        if (Ticks.Count == 0)
-        {
-            Ticks = null;
-            return;
-        }
-
-        if (Timer < SecondsPerTick)
+        TickData tick = CurrentSong.ticks[CurrentSong.CurrentTick];
+        
+        if (Timer < (CurrentSong.SecondsPerTick * tick.deltaTime))
         {
             return;
-        }
-
-        TickData tick = Ticks.Dequeue();
+        }        
+        
         foreach (string command in tick.cmd)
         {
             string[] parts = command.Split(":");
@@ -88,10 +87,10 @@ public class PianoManager : MonoBehaviour
             switch (action)
             {
                 case CMD_ON:
-                    key.State = "tutorial";
+                    key.State = Mode;
                     break;
                 case CMD_ON_LEFT:
-                    key.State = "tutorial_left";
+                    key.State = Mode + "_left";
                     break;
                 case CMD_OFF:
                     key.StopKey();
@@ -102,17 +101,32 @@ public class PianoManager : MonoBehaviour
             }
         }
 
-        Timer -= SecondsPerTick;
+        if (CurrentSong.CurrentTick == (CurrentSong.ticks.Count - 1))
+        {
+            if (Mode == "guided")
+            {
+                Mode = "";
+                return;
+            }
+            
+            CurrentSong.CurrentTick = 0;
+            Timer = 0f;
+            Mode = "guided";
+            Debug.Log("Trocando modo tutorial para guided");
+            return;
+        }
+
+        CurrentSong.CurrentTick++;
+        Timer -= CurrentSong.SecondsPerTick * tick.deltaTime;
     }
 
     public static void LoadSong(SongData song)
     {
-        float bpm = song.bpm;
-
-        SecondsPerTick = 60 / bpm;
+        song.SecondsPerTick = 60 / (song.bpm * song.ppqn);
         Timer = 0f;
-        Ticks = new Queue<TickData>(song.ticks);
+        CurrentSong = song;
+        Mode = "tutorial";
 
-        Debug.Log($"Carregando musica com {bpm} bpm e {song.ticks.Count} ticks");
+        Debug.Log($"Carregando musica {song.name}");
     }
 }

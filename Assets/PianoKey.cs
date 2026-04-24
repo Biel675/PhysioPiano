@@ -38,20 +38,25 @@ public class PianoKey : MonoBehaviour
 
         float currentTime = Time.time;
 
-        if (!isNotePlayed)
+        if (!isNotePlayed && (State == "tutorial" || State == "tutorial_left" || isBeingPressed))
         {
             audioSource.PlayOneShot(noteSound);
             isNotePlayed = true;
             lastPlayedTime = currentTime;
         }
 
-        if (State == "tutorial" || State == "tutorial_left")
+        if (isBeingPressed)
+        {
+            return;
+        }
+
+        if (State == "tutorial" || State == "tutorial_left" || State == "guided" || State == "guided_left")
         {
             if ((currentTime - lastPlayedTime) < FLICKER_DURATION_SECS)
             {
                 objectRenderer.material.color = originalColor;
             }
-            else if (State == "tutorial")
+            else if (State == "tutorial" || State == "guided")
             {
                 objectRenderer.material.color = guidedColor;
             }
