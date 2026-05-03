@@ -19,7 +19,7 @@ public class PianoKey : MonoBehaviour
     private bool isNotePlayed = false;
 
     private Color originalColor;
-    public Color pressedColor = Color.green;
+    public Color pressedColor = Color.blue;
     public Color guidedColor = Color.red;
     public Color guidedColorLeft = Color.cyan;
     private Renderer objectRenderer;

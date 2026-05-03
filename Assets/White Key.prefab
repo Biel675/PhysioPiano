@@ -305,7 +305,7 @@ MonoBehaviour:
   isBeingPressed: 0
   keyNotation: 
   noteSound: {fileID: 0}
-  pressedColor: {r: 0, g: 1, b: 0, a: 1}
+  pressedColor: {r: 0, g: 0, b: 1, a: 1}
   guidedColor: {r: 1, g: 0, b: 0, a: 1}
   guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!82 &4569662446476679861
