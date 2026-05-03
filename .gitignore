@@ -1,4 +1,5 @@
 .vscode/
+*.lscache
 
 .utmp/
 /[Ll]ibrary/
