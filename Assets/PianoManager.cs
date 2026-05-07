@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEditor.Rendering;
 using System.Xml;
+using System;
+using TMPro;
+using Unity.VisualScripting;
 
 public class PianoManager : MonoBehaviour
 {
@@ -12,6 +15,8 @@ public class PianoManager : MonoBehaviour
     public static string Mode { get; set; }
     private static SongData CurrentSong { get; set; }
     private static float Timer { get; set; }
+    private static float TutorialCountdown { get; set; } = 10f;
+    [SerializeField] private TextMeshPro tutorialCountdownText;
 
     private const string CMD_ON = "on"; // right hand is default
     private const string CMD_ON_LEFT = "on_left";
@@ -63,6 +68,18 @@ public class PianoManager : MonoBehaviour
             return;
         }
 
+        if (TutorialCountdown >= 0)
+        {
+            TutorialCountdown -= Time.deltaTime;
+            string secondsRemaining = Math.Ceiling(TutorialCountdown).ToString();
+            tutorialCountdownText.text = secondsRemaining + "\nSe prepare!";
+            return;
+        }
+        else if (tutorialCountdownText.gameObject.activeInHierarchy)
+        {
+            tutorialCountdownText.gameObject.SetActive(false);
+        }
+
         Timer += Time.deltaTime;
 
         TickData tick = CurrentSong.ticks[CurrentSong.CurrentTick];
@@ -70,7 +87,7 @@ public class PianoManager : MonoBehaviour
         if (Timer < (CurrentSong.SecondsPerTick * tick.deltaTime))
         {
             return;
-        }        
+        }
         
         foreach (string command in tick.cmd)
         {
@@ -111,6 +128,9 @@ public class PianoManager : MonoBehaviour
             
             CurrentSong.CurrentTick = 0;
             Timer = 0f;
+            TutorialCountdown = 10f;
+            tutorialCountdownText.gameObject.SetActive(true);
+
             Mode = "guided";
             Debug.Log("Trocando modo tutorial para guided");
             return;
@@ -124,6 +144,7 @@ public class PianoManager : MonoBehaviour
     {
         song.SecondsPerTick = 60 / (song.bpm * song.ppqn);
         Timer = 0f;
+        TutorialCountdown = 10f;
         CurrentSong = song;
         Mode = "tutorial";
 
