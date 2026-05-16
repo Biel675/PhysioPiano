@@ -1,12 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using UnityEditor.Rendering;
-using System.Xml;
 using System;
 using TMPro;
-using Unity.VisualScripting;
 
 public class PianoManager : MonoBehaviour
 {
@@ -17,6 +13,11 @@ public class PianoManager : MonoBehaviour
     private static float Timer { get; set; }
     private static float TutorialCountdown { get; set; } = 10f;
     [SerializeField] private TextMeshPro tutorialCountdownText;
+
+    private static readonly HashSet<string> CurrentTickPressedKeys = new HashSet<string>();
+    private static readonly HashSet<string> HeldKeys = new HashSet<string>();
+    private static readonly HashSet<string> CurrentTickReleasedKeys = new HashSet<string>();
+    private static readonly HashSet<string> PreviouslyReleasedKeys = new HashSet<string>();
 
     private const string CMD_ON = "on"; // right hand is default
     private const string CMD_ON_LEFT = "on_left";
@@ -65,6 +66,9 @@ public class PianoManager : MonoBehaviour
         if (CurrentSong == null)
         {
             Mode = "";
+            CurrentTickPressedKeys.Clear();
+            HeldKeys.Clear();
+            CurrentTickReleasedKeys.Clear();
             return;
         }
 
@@ -88,6 +92,12 @@ public class PianoManager : MonoBehaviour
         {
             return;
         }
+
+        PreviouslyReleasedKeys.UnionWith(CurrentTickReleasedKeys);
+        CurrentTickReleasedKeys.Clear();
+
+        HeldKeys.UnionWith(CurrentTickPressedKeys);
+        CurrentTickPressedKeys.Clear();
         
         foreach (string command in tick.cmd)
         {
@@ -105,12 +115,16 @@ public class PianoManager : MonoBehaviour
             {
                 case CMD_ON:
                     key.State = Mode;
+                    CurrentTickPressedKeys.Add(keyName);
                     break;
                 case CMD_ON_LEFT:
                     key.State = Mode + "_left";
+                    CurrentTickPressedKeys.Add(keyName);
                     break;
                 case CMD_OFF:
                     key.StopKey();
+                    HeldKeys.Remove(keyName);
+                    CurrentTickReleasedKeys.Add(keyName);
                     break;
                 default:
                     Debug.LogError($"Comando nao especificado: {action}");
@@ -138,6 +152,50 @@ public class PianoManager : MonoBehaviour
 
         CurrentSong.CurrentTick++;
         Timer -= CurrentSong.SecondsPerTick * tick.deltaTime;
+    }
+
+    
+    public static void KeyCommand(string key, string command)
+    {
+        if (command == "on")
+        {
+            if (CurrentTickPressedKeys.Contains(key))
+            {
+                Debug.Log($"ACERTO: {key} ON");
+                CurrentTickPressedKeys.Remove(key);
+            }
+            else if (HeldKeys.Contains(key))
+            {
+                Debug.Log($"MEIO ACERTO: {key} ON; COM ATRASO");
+                HeldKeys.Remove(key);
+            }
+            else
+            {
+                Debug.Log($"ERRO: {key} ON");
+            }
+        }
+        else if (command == "off")
+        {
+            if (CurrentTickReleasedKeys.Contains(key))
+            {
+                Debug.Log($"ACERTO: {key} OFF");
+                CurrentTickReleasedKeys.Remove(key);
+            }
+            else if (PreviouslyReleasedKeys.Contains(key))
+            {
+                Debug.Log($"MEIO ACERTO: {key} OFF; COM ATRASO");
+                PreviouslyReleasedKeys.Remove(key);
+            }
+            else
+            {
+                Debug.Log($"ERRO: {key} OFF");
+            }
+        }
+    }
+
+    public static bool ExpectsInput()
+    {
+        return Mode == "guided" && TutorialCountdown < 0;
     }
 
     public static void LoadSong(SongData song)

@@ -111,6 +111,11 @@ public class PianoKey : MonoBehaviour
         State = "on";
 
         Debug.Log($"Key pressed: {keyNotation}");
+
+        if (PianoManager.ExpectsInput())
+        {
+            PianoManager.KeyCommand(keyNotation, "on");
+        }
     }
 
     void OnTriggerStay(Collider other)
@@ -158,5 +163,10 @@ public class PianoKey : MonoBehaviour
         
         StopKey();
         objectRenderer.material.color = originalColor;
+
+        if (PianoManager.ExpectsInput())
+        {
+            PianoManager.KeyCommand(keyNotation, "off");   
+        }
     }
 }
