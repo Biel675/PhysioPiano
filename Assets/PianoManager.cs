@@ -6,7 +6,6 @@ using TMPro;
 
 public class PianoManager : MonoBehaviour
 {
-    public const string MENUS_SCENE_NAME = "Menus Scene";
     private Dictionary<string, PianoKey> keysMap = new Dictionary<string, PianoKey>();
     public static string Mode { get; set; }
     private static SongData CurrentSong { get; set; }
@@ -53,11 +52,6 @@ public class PianoManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene(MENUS_SCENE_NAME);
-        }
-
         if (Mode != "tutorial" && Mode != "guided")
         {
             return;
