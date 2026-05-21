@@ -285,7 +285,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.75, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-6790557597894321635
 MonoBehaviour:
@@ -302,12 +302,6 @@ MonoBehaviour:
   maxDepression: 0.02
   maxAngle: 5
   rotationSpeed: 15
-  isBeingPressed: 0
-  keyNotation: 
-  noteSound: {fileID: 0}
-  pressedColor: {r: 0, g: 0, b: 1, a: 1}
-  guidedColor: {r: 1, g: 0, b: 0, a: 1}
-  guidedColorLeft: {r: 0, g: 1, b: 1, a: 1}
 --- !u!82 &4569662446476679861
 AudioSource:
   m_ObjectHideFlags: 0
