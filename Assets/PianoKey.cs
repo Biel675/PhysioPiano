@@ -1,94 +1,53 @@
-using System;
+using System.Collections;
 using Bhaptics.SDK2;
 using Bhaptics.SDK2.Glove;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.EnhancedTouch;
 
+[RequireComponent(typeof(Renderer))]
+[RequireComponent(typeof(AudioSource))]
 public class PianoKey : MonoBehaviour
 {
     public float maxDepression = 0.02f;
     public float maxAngle = 5f;
     public float rotationSpeed = 15f;
 
-    public bool isBeingPressed = false;
-    public string keyNotation;
+    private KeyState _state;
+    private PianoManager _pianoManager;
+    private string _keyName;
+    private bool _isPlayerPressing;
+    
+    private AudioSource _audioSource;
+    private AudioClip _noteAudioClip;
+    private bool _wasNotePlayed;
 
-    public AudioClip noteSound;
-    private AudioSource audioSource;
-    private bool isNotePlayed = false;
-
-    private Color originalColor;
-    public Color pressedColor = Color.blue;
-    public Color guidedColor = Color.red;
-    public Color guidedColorLeft = Color.cyan;
-    private Renderer objectRenderer;
-
+    private Renderer _objectRenderer;
+    private static readonly Color PRESSED_COLOR = Color.blue;
+    private static readonly Color TUTORIAL_COLOR = Color.red;
+    private static readonly Color TUTORIAL_LEFT_COLOR = Color.cyan;
+    private Color _originalColor;
+    private bool _isFlickering = false;
     private static readonly float FLICKER_DURATION_SECS = 0.1f;
-    private float lastPlayedTime;
 
-    public string State { get; set; } = "off";
-
-    void LateUpdate()
+    public void Init(PianoManager pianoManager)
     {
-        if (State == "off")
-        {
-            return;
-        }
-
-        float currentTime = Time.time;
-
-        if (!isNotePlayed && (State == "tutorial" || State == "tutorial_left" || isBeingPressed))
-        {
-            audioSource.PlayOneShot(noteSound);
-            isNotePlayed = true;
-            lastPlayedTime = currentTime;
-        }
-
-        if (isBeingPressed)
-        {
-            return;
-        }
-
-        if (State == "tutorial" || State == "tutorial_left" || State == "guided" || State == "guided_left")
-        {
-            if ((currentTime - lastPlayedTime) < FLICKER_DURATION_SECS)
-            {
-                objectRenderer.material.color = originalColor;
-            }
-            else if (State == "tutorial" || State == "guided")
-            {
-                objectRenderer.material.color = guidedColor;
-            }
-            else
-            {
-                objectRenderer.material.color = guidedColorLeft;
-            }
-        }
-    }
-
-    public void StopKey()
-    {
-        State = "off";
-        isNotePlayed = false;
-        objectRenderer.material.color = originalColor;
+        _pianoManager = pianoManager;
     }
 
     void Start()
     {
-        keyNotation = name.Split("_")[1];
-        noteSound = Resources.Load<AudioClip>("PianoNotes/" + keyNotation);
+        _keyName = name.Split("_")[1];
 
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null) Debug.LogError("Missing AudioSource on " + name);
+        _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null) Debug.LogError("Missing AudioSource on " + name);
+        _noteAudioClip = Resources.Load<AudioClip>("PianoNotes/" + _keyName);
 
-        objectRenderer = GetComponent<Renderer>();
-        originalColor = objectRenderer.material.color;
+        _objectRenderer = GetComponent<Renderer>();
+        _originalColor = _objectRenderer.material.color;
     }
 
     void Update()
     {
-        if (!isBeingPressed)
+        if (!_isPlayerPressing)
         {
             Quaternion restRotation = Quaternion.identity;
             transform.localRotation = Quaternion.Slerp(
@@ -97,33 +56,34 @@ public class PianoKey : MonoBehaviour
                 Time.deltaTime * rotationSpeed
             );
         }
+
+        if (!_wasNotePlayed && (_isPlayerPressing || _state == KeyState.TUTORIAL || _state == KeyState.TUTORIAL_LEFT))
+        {
+            _audioSource.PlayOneShot(_noteAudioClip);
+            _wasNotePlayed = true;
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        FingerHapticData fingerData = other.GetComponent<FingerHapticData>();
-        if (fingerData == null || fingerData.pressedKey != null) return;
-        fingerData.pressedKey = keyNotation;
+        if (!TryGetFingerData(other, out FingerHapticData fingerData) || !string.IsNullOrEmpty(fingerData.pressedKey)) return;
+        fingerData.pressedKey = _keyName;
 
-        isBeingPressed = true;
+        Debug.Log($"Tecla pressionada: {_keyName}");
 
-        objectRenderer.material.color = pressedColor;
-        State = "on";
+        _isPlayerPressing = true;
 
-        Debug.Log($"Key pressed: {keyNotation}");
-
-        if (PianoManager.ExpectsInput())
+        if (_pianoManager.SongController != null && _pianoManager.SongController.ExpectsInput())
         {
-            PianoManager.KeyCommand(keyNotation, "on");
+            _pianoManager.SongController.KeyCommand(_keyName, TickCommandAction.ON);
         }
+
+        UpdateKeyColor();
     }
 
     void OnTriggerStay(Collider other)
     {
-        isBeingPressed = true;
-
-        FingerHapticData fingerData = other.GetComponent<FingerHapticData>();
-        if (fingerData == null || fingerData.pressedKey != keyNotation) return;
+        if (!TryGetFingerData(other, out FingerHapticData fingerData) || fingerData.pressedKey != _keyName) return;
 
         Vector3 localFingerPosition = transform.InverseTransformPoint(other.transform.position);
 
@@ -148,25 +108,92 @@ public class PianoKey : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        FingerHapticData fingerData = other.GetComponent<FingerHapticData>();
-        if (fingerData == null)
-        {
-            Debug.LogWarning("Erro na FingerData");
-            return;
-        }
+        if (!TryGetFingerData(other, out FingerHapticData fingerData) || fingerData.pressedKey != _keyName) return;
         fingerData.pressedKey = null;
-
-        isBeingPressed = false;
 
         PositionType posType = fingerData.isLeftHand ? PositionType.GloveL : PositionType.GloveR;
         BhapticsPhysicsGlove.Instance.SendExitHaptic(posType, fingerData.fingerIndex);  
-        
-        StopKey();
-        objectRenderer.material.color = originalColor;
 
-        if (PianoManager.ExpectsInput())
+        _isPlayerPressing = false;
+        _wasNotePlayed = false;
+
+        if (_pianoManager.SongController != null && _pianoManager.SongController.ExpectsInput())
         {
-            PianoManager.KeyCommand(keyNotation, "off");   
+            _pianoManager.SongController.KeyCommand(_keyName, TickCommandAction.OFF);   
+        }
+
+        UpdateKeyColor();
+    }
+
+    public void ChangeKeyState(KeyState newState)
+    {
+        if (!_isPlayerPressing)
+        {
+            if (newState == KeyState.NONE && (_state == KeyState.TUTORIAL || _state == KeyState.TUTORIAL_LEFT))
+            {
+                _wasNotePlayed = false;
+            } else if (newState != KeyState.NONE && !_isFlickering)
+            {
+                StartCoroutine(FlickerKeyTutorial(newState));
+                return;
+            }
+        }
+        _state = newState;
+        UpdateKeyColor();
+    }
+
+    private void UpdateKeyColor()
+    {
+        if (_isPlayerPressing)
+        {
+            _objectRenderer.material.color = PRESSED_COLOR;
+        }
+        else if (_state == KeyState.NONE)
+        {
+            _objectRenderer.material.color = _originalColor;
+        }
+        else if (_state == KeyState.TUTORIAL || _state == KeyState.GUIDED)
+        {
+            _objectRenderer.material.color = TUTORIAL_COLOR;
+        }
+        else
+        {
+            _objectRenderer.material.color = TUTORIAL_LEFT_COLOR;
         }
     }
+
+    private IEnumerator FlickerKeyTutorial(KeyState targetState)
+    {
+        _isFlickering = true;
+
+        _state = KeyState.NONE;
+        UpdateKeyColor();
+
+        yield return new WaitForSeconds(FLICKER_DURATION_SECS);
+
+        _state = targetState;
+        UpdateKeyColor();
+
+        _isFlickering = false;
+    }
+
+    private bool TryGetFingerData(Collider fingerCollider, out FingerHapticData fingerData)
+    {
+        fingerData = fingerCollider.GetComponent<FingerHapticData>();
+        if (fingerData == null)
+        {
+            Debug.LogError("Erro ao ler FingerHapticData");
+            return false;
+        }
+        return true;
+    }
+}
+
+public enum KeyState
+{
+    NONE,
+    TUTORIAL,
+    TUTORIAL_LEFT,
+    GUIDED,
+    GUIDED_LEFT
 }

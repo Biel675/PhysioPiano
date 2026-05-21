@@ -24,7 +24,7 @@ public class SongSelectionButton : MonoBehaviour
 
     public void OnClick()
     {
-        PianoManager.LoadSong(SongData);
+        PianoManager.SelectedSongData = SongData;
         SceneManager.LoadScene(MainMenu.PIANO_SCENE_NAME);
     }
 }
