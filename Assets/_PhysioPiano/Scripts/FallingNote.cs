@@ -5,7 +5,7 @@ public class FallingNote : MonoBehaviour
     private float _endingY;
     private float _speed;
     private PlayingSongController _songController;
-    [SerializeField] private float _noteBaseOffset = 0.025f;
+    [SerializeField] private float _noteBaseOffset = 0f;
 
     public void Init(PlayingSongController songController, PianoKey key, int accumulatedDeltaTimeStart, int accumulatedDeltaTimeEnd, int ppqn, float bpm)
     {
@@ -16,7 +16,7 @@ public class FallingNote : MonoBehaviour
         float height = length * quarterNotes;
         transform.localScale = new Vector3(length, height, 0);
 
-        _endingY = key.transform.position.y + _noteBaseOffset;
+        _endingY = key.transform.position.y + (key.transform.localScale.y / 2f) + _noteBaseOffset;
         float timeOffset = (float) accumulatedDeltaTimeStart / ppqn * length;
         float startingY = _endingY + timeOffset + (height / 2f);
         _speed = length * bpm / 60f;

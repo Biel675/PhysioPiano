@@ -122,3 +122,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3257f4f37a19b94382dd59c04238c8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _noteBaseOffset: 0
