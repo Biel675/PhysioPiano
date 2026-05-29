@@ -13,6 +13,8 @@ public class PianoManager : MonoBehaviour
     public PlayingSongController SongController { get; private set; } = null;
     public static SongData SelectedSongData { get; set; } = null;
 
+    [SerializeField] private GameObject _fallingNotePrefab;
+
     [SerializeField] private GameObject fullPiano;
     [SerializeField] private GameObject reducedPiano;
     public static string CurrentPiano { get; set; } = "Full";
@@ -61,6 +63,6 @@ public class PianoManager : MonoBehaviour
 
     public void LoadSong(SongData data)
     {
-        SongController = new(data, TutorialCountdown, this, _keysMap);
+        SongController = new(data, TutorialCountdown, this, _keysMap, _fallingNotePrefab);
     }
 }

@@ -12,6 +12,9 @@ public class PlayingSongController
     private int _currentTick;
     private readonly float _secondsPerTick;
 
+    private readonly HashSet<FallingNoteData> _fallingNotes = new();
+    private readonly GameObject _fallingNotePrefab;
+
     private PianoPlayingMode _playingMode = PianoPlayingMode.NONE;
 
     private readonly HashSet<string> _currentTickPressedKeys = new();
@@ -22,12 +25,13 @@ public class PlayingSongController
     private readonly PianoManager _pianoManager;
     private readonly Dictionary<string, PianoKey> _keysMap;
 
-    public PlayingSongController(SongData data, float tutorialCountdownTime, PianoManager pianoManager, Dictionary<string, PianoKey> keysMap)
+    public PlayingSongController(SongData data, float tutorialCountdownTime, PianoManager pianoManager, Dictionary<string, PianoKey> keysMap, GameObject fallingNotePrefab)
     {
         _data = data;
         _pianoManager = pianoManager;
         _keysMap = keysMap;
         _tutorialCountdownTime = tutorialCountdownTime;
+        _fallingNotePrefab = fallingNotePrefab;
 
         _secondsPerTick = 60f / (_data.bpm * _data.ppqn);
 
@@ -47,7 +51,7 @@ public class PlayingSongController
         UpdateSongPlayback(deltaTime);
     }
 
-    private bool IsCountdownComplete()
+    public bool IsCountdownComplete()
     {
         return _tutorialCounter <= 0;
     }
@@ -63,6 +67,63 @@ public class PlayingSongController
         } else {
             _pianoManager.TutorialCountdownText.gameObject.SetActive(false);
         }
+    }
+
+    private void ProcessFallingNotes()
+    {
+        Dictionary<string, FallingNoteData> pressedKeysTicks = new();
+        int accumulatedDeltaTime = 0;
+
+        for (int i = 0; i < _data.ticks.Count; i++)
+        {
+            TickData tick = _data.ticks[i];
+            accumulatedDeltaTime += tick.deltaTime;
+
+            foreach (string cmd in tick.cmd)
+            {
+                if (!TryIdentifyActionAndKey(cmd, out string actionStr, out TickCommandAction action, out string keyName, out PianoKey key)) continue;
+
+                FallingNoteData fallingNoteData;
+                switch (action)
+                {
+                    case TickCommandAction.ON:
+                        fallingNoteData = new(keyName, i, accumulatedDeltaTime);
+                        pressedKeysTicks.Add(keyName, fallingNoteData);
+                        break;
+                    case TickCommandAction.ON_LEFT:
+                        fallingNoteData = new(keyName, i, accumulatedDeltaTime);
+                        pressedKeysTicks.Add(keyName, fallingNoteData);
+                        break;
+                    case TickCommandAction.OFF:
+                        if (!pressedKeysTicks.Remove(keyName, out fallingNoteData))
+                        {
+                            Debug.LogError($"Comando OFF em tecla desligada: {keyName}");
+                            continue;
+                        }
+
+                        fallingNoteData.EndingTick = i;
+                        fallingNoteData.AccumulatedDeltaTimeEnd = accumulatedDeltaTime;
+                        _fallingNotes.Add(fallingNoteData);
+                        break;
+                    default:
+                        Debug.LogError($"Acao nao reconhecida: {actionStr}");
+                        break;
+                }
+            }
+        }
+
+        foreach (FallingNoteData fallingNoteData in _fallingNotes)
+        {
+            SpawnFallingNote(fallingNoteData);
+        }
+    }
+
+    private void SpawnFallingNote(FallingNoteData fallingNoteData)
+    {
+        GameObject fallingNoteObj = UnityEngine.Object.Instantiate(_fallingNotePrefab);
+        FallingNote fallingNote = fallingNoteObj.GetComponent<FallingNote>();
+
+        fallingNote.Init(this, _keysMap[fallingNoteData.Key], fallingNoteData.AccumulatedDeltaTimeStart, fallingNoteData.AccumulatedDeltaTimeEnd, _data.ppqn, _data.bpm);
     }
 
     private void UpdateSongPlayback(float deltaTime)
@@ -104,21 +165,8 @@ public class PlayingSongController
 
         foreach (string cmd in tick.cmd)
         {
-            string[] parts = cmd.Split(':');
-            string actionStr = parts[0].ToUpper();
-            string keyName = parts[1];
+            if (!TryIdentifyActionAndKey(cmd, out string actionStr, out TickCommandAction action, out string keyName, out PianoKey key)) continue;
 
-            if (!_keysMap.TryGetValue(keyName, out PianoKey key))
-            {
-                Debug.LogError($"Tecla inexistente no piano: {keyName}");
-                continue;
-            }
-
-            if (!Enum.TryParse(actionStr, out TickCommandAction action))
-            {
-                Debug.LogError($"Acao nao reconhecida: {actionStr}");
-                continue;
-            }
             KeyState newKeyState;
             switch (action)
             {
@@ -142,6 +190,39 @@ public class PlayingSongController
             }
             key.ChangeKeyState(newKeyState);
         }
+    }
+
+    private bool TryIdentifyActionAndKey(string cmd, out string actionStr, out TickCommandAction action, out string keyName, out PianoKey key)
+    {
+        actionStr = null;
+        action = default;
+        keyName = null;
+        key = null;
+
+        string[] parts = cmd.Split(':');
+
+        if (parts.Length != 2)
+        {
+            Debug.LogError($"Commando invalido: {cmd}");
+            return false;
+        }
+
+        actionStr = parts[0].ToUpper();
+        keyName = parts[1];
+
+        if (!_keysMap.TryGetValue(keyName, out key))
+        {
+            Debug.LogError($"Tecla inexistente no piano: {keyName}");
+            return false;
+        }
+
+        if (!Enum.TryParse(actionStr, out action))
+        {
+            Debug.LogError($"Acao nao reconhecida: {actionStr}");
+            return false;
+        }
+
+        return true;
     }
 
     public void KeyCommand(string key, TickCommandAction command)
@@ -196,6 +277,9 @@ public class PlayingSongController
         _previouslyPressedKeys.Clear();
         _currentTickReleasedKeys.Clear();
         _previouslyReleasedKeys.Clear();
+
+        _fallingNotes.Clear();
+        ProcessFallingNotes();
 
         Debug.Log($"Iniciando musica no modo {playingMode}");
     }
