@@ -14,6 +14,9 @@ public class PianoManager : MonoBehaviour
     public static SongData SelectedSongData { get; set; } = null;
 
     [SerializeField] private GameObject _fallingNotePrefab;
+    [SerializeField] private ParticleSystem _correctPressParticle;
+    [SerializeField] private ParticleSystem _latePressParticle;
+    [SerializeField] private ParticleSystem _missedPressParticle;
 
     [SerializeField] private GameObject fullPiano;
     [SerializeField] private GameObject reducedPiano;
@@ -63,6 +66,6 @@ public class PianoManager : MonoBehaviour
 
     public void LoadSong(SongData data)
     {
-        SongController = new(data, TutorialCountdown, this, _keysMap, _fallingNotePrefab);
+        SongController = new(data, TutorialCountdown, this, _keysMap, _fallingNotePrefab, _correctPressParticle, _latePressParticle, _missedPressParticle);
     }
 }

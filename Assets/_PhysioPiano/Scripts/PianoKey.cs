@@ -75,7 +75,7 @@ public class PianoKey : MonoBehaviour
 
         if (_pianoManager.SongController != null && _pianoManager.SongController.ExpectsInput())
         {
-            _pianoManager.SongController.KeyCommand(_keyName, TickCommandAction.ON);
+            _pianoManager.SongController.KeyCommand(_keyName, transform.position, TickCommandAction.ON);
         }
 
         UpdateKeyColor();
@@ -119,7 +119,7 @@ public class PianoKey : MonoBehaviour
 
         if (_pianoManager.SongController != null && _pianoManager.SongController.ExpectsInput())
         {
-            _pianoManager.SongController.KeyCommand(_keyName, TickCommandAction.OFF);   
+            _pianoManager.SongController.KeyCommand(_keyName, transform.position, TickCommandAction.OFF);   
         }
 
         UpdateKeyColor();

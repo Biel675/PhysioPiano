@@ -25,13 +25,17 @@ public class PlayingSongController
     private readonly PianoManager _pianoManager;
     private readonly Dictionary<string, PianoKey> _keysMap;
 
-    public PlayingSongController(SongData data, float tutorialCountdownTime, PianoManager pianoManager, Dictionary<string, PianoKey> keysMap, GameObject fallingNotePrefab)
+    public PlayingSongController(SongData data, float tutorialCountdownTime, PianoManager pianoManager, Dictionary<string, PianoKey> keysMap, GameObject fallingNotePrefab, ParticleSystem correctPressParticle, ParticleSystem latePressParticle, ParticleSystem missedPressParticle)
     {
         _data = data;
         _pianoManager = pianoManager;
         _keysMap = keysMap;
         _tutorialCountdownTime = tutorialCountdownTime;
         _fallingNotePrefab = fallingNotePrefab;
+        
+        _correctPressParticle = correctPressParticle;
+        _latePressParticle = latePressParticle;
+        _missedPressParticle = missedPressParticle;
 
         _secondsPerTick = 60f / (_data.bpm * _data.ppqn);
 
@@ -225,20 +229,28 @@ public class PlayingSongController
         return true;
     }
 
-    public void KeyCommand(string key, TickCommandAction command)
+    [SerializeField] private ParticleSystem _correctPressParticle;
+    [SerializeField] private ParticleSystem _latePressParticle;
+    [SerializeField] private ParticleSystem _missedPressParticle;
+
+    public void KeyCommand(string key, Vector3 pos, TickCommandAction command)
     {
+        ParticleSystem particle = null;
         if (command == TickCommandAction.ON)
         {
             if (_currentTickPressedKeys.Remove(key))
             {
+                particle = _correctPressParticle;
                 Debug.Log($"ACERTO: {key} ON");
             }
             else if (_previouslyPressedKeys.Remove(key))
             {
+                particle = _latePressParticle;
                 Debug.Log($"MEIO ACERTO: {key} ON; COM ATRASO");
             }
             else
             {
+                particle = _missedPressParticle;
                 Debug.Log($"ERRO: {key} ON");
             }
         }
@@ -246,17 +258,24 @@ public class PlayingSongController
         {
             if (_currentTickReleasedKeys.Remove(key))
             {
+                particle = _correctPressParticle;
                 Debug.Log($"ACERTO: {key} OFF");
             }
             else if (_previouslyReleasedKeys.Remove(key))
             {
+                particle = _latePressParticle;
                 Debug.Log($"MEIO ACERTO: {key} OFF; COM ATRASO");
             }
             else
             {
+                particle = _missedPressParticle;
                 Debug.Log($"ERRO: {key} OFF");
             }
         }
+
+        if (particle == null) return;
+        particle.transform.position = new Vector3(pos.x, pos.y + 0.02f, pos.z);
+        particle.Emit(3);
     }
 
     public bool ExpectsInput()
