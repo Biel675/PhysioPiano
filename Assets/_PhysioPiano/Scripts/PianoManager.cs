@@ -21,6 +21,10 @@ public class PianoManager : MonoBehaviour
     [SerializeField] private GameObject reducedPiano;
     public static string CurrentPiano { get; set; } = "Full";
 
+    [SerializeField] private Color _pressedKeyColor = Color.blue;
+    [SerializeField] private Color _tutorialKeyColor = Color.red;
+    [SerializeField] private Color _tutorialLeftKeyColor = Color.cyan;
+
     void Awake()
     {
         if (CurrentPiano == "Full")
@@ -40,7 +44,7 @@ public class PianoManager : MonoBehaviour
         {
             string keyNote = key.name.Split("_")[1];
             _keysMap.Add(keyNote, key);
-            key.Init(this);
+            key.Init(this, _pressedKeyColor, _tutorialKeyColor, _tutorialLeftKeyColor);
         }
 
         Debug.Log("Piano carregado com " + _keysMap.Count + " teclas");

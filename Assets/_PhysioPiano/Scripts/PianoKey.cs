@@ -21,16 +21,20 @@ public class PianoKey : MonoBehaviour
     private bool _wasNotePlayed;
 
     private Renderer _objectRenderer;
-    private static readonly Color PRESSED_COLOR = Color.blue;
-    private static readonly Color TUTORIAL_COLOR = Color.red;
-    private static readonly Color TUTORIAL_LEFT_COLOR = Color.cyan;
+    [SerializeField] private Color _scriabinColor;
+    private Color _pressedKeyColor;
+    private Color _tutorialKeyColor;
+    private Color _tutorialLeftKeyColor;
     private Color _originalColor;
     private bool _isFlickering = false;
     private static readonly float FLICKER_DURATION_SECS = 0.1f;
 
-    public void Init(PianoManager pianoManager)
+    public void Init(PianoManager pianoManager, Color pressedKeyColor, Color tutorialKeyColor, Color tutorialLeftKeyColor)
     {
         _pianoManager = pianoManager;
+        _pressedKeyColor = pressedKeyColor;
+        _tutorialKeyColor = tutorialKeyColor;
+        _tutorialLeftKeyColor = tutorialLeftKeyColor;
     }
 
     void Start()
@@ -146,20 +150,24 @@ public class PianoKey : MonoBehaviour
     {
         if (_isPlayerPressing)
         {
-            _objectRenderer.material.color = PRESSED_COLOR;
+            _objectRenderer.material.color = _pressedKeyColor;
         }
         else if (_state == KeyState.NONE)
         {
             _objectRenderer.material.color = _originalColor;
         }
-        else if (_state == KeyState.TUTORIAL || _state == KeyState.GUIDED)
-        {
-            _objectRenderer.material.color = TUTORIAL_COLOR;
-        }
         else
         {
-            _objectRenderer.material.color = TUTORIAL_LEFT_COLOR;
+            bool isLeftHand = _state == KeyState.TUTORIAL_LEFT || _state == KeyState.GUIDED_LEFT;
+            _objectRenderer.material.color = GetTutorialColor(Config.USE_LIGHTS_KEYBOARD, isLeftHand);
         }
+    }
+
+    public Color GetTutorialColor(bool usingLightsKeyboard, bool isLeftHand)
+    {
+        if (usingLightsKeyboard) return _scriabinColor;
+        if (isLeftHand) return _tutorialLeftKeyColor;
+        return _tutorialKeyColor;
     }
 
     private IEnumerator FlickerKeyTutorial(KeyState targetState)

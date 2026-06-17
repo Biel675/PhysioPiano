@@ -6,7 +6,7 @@ public class FallingNote : MonoBehaviour
     private float _speed;
     [SerializeField] private float _noteBaseOffset = 0f;
 
-    public void Init(PianoKey key, int accumulatedDeltaTimeStart, int accumulatedDeltaTimeEnd, int ppqn, float bpm)
+    public void Init(PianoKey key, int accumulatedDeltaTimeStart, int accumulatedDeltaTimeEnd, int ppqn, float bpm, Color color)
     {
         float length = key.transform.localScale.x;
         float quarterNotes = (float) (accumulatedDeltaTimeEnd - accumulatedDeltaTimeStart) / ppqn;
@@ -22,6 +22,9 @@ public class FallingNote : MonoBehaviour
         float posY = startingY;
         float posZ = key.transform.position.z - key.transform.localScale.z / 2f;
         transform.position = new Vector3(posX, posY, posZ);
+
+        Renderer coloredNoteRenderer = transform.Find("Note").GetComponent<Renderer>();
+        coloredNoteRenderer.material.color = color;
     }
 
     public bool UpdatePosition()

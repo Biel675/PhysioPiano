@@ -91,32 +91,29 @@ public class PlayingSongController
                 if (!TryIdentifyActionAndKey(cmd, out string actionStr, out TickCommandAction action, out string keyName, out PianoKey key)) continue;
 
                 FallingNoteData fallingNoteData;
-                switch (action)
+                if (action == TickCommandAction.ON || action == TickCommandAction.ON_LEFT)
                 {
-                    case TickCommandAction.ON:
-                        fallingNoteData = new(keyName, i, accumulatedDeltaTime);
-                        pressedKeysTicks.Add(keyName, fallingNoteData);
-                        break;
-                    case TickCommandAction.ON_LEFT:
-                        fallingNoteData = new(keyName, i, accumulatedDeltaTime);
-                        pressedKeysTicks.Add(keyName, fallingNoteData);
-                        break;
-                    case TickCommandAction.OFF:
-                        if (!pressedKeysTicks.Remove(keyName, out fallingNoteData))
-                        {
-                            Debug.LogError($"Comando OFF em tecla desligada: {keyName}");
-                            continue;
-                        }
+                    bool leftHandPressed = action == TickCommandAction.ON_LEFT;
+                    fallingNoteData = new(keyName, leftHandPressed, i, accumulatedDeltaTime);
+                    pressedKeysTicks.Add(keyName, fallingNoteData);
+                }
+                else if (action == TickCommandAction.OFF)
+                {
+                    if (!pressedKeysTicks.Remove(keyName, out fallingNoteData))
+                    {
+                        Debug.LogError($"Comando OFF em tecla desligada: {keyName}");
+                        continue;
+                    }
 
-                        fallingNoteData.EndingTick = i;
-                        fallingNoteData.AccumulatedDeltaTimeEnd = accumulatedDeltaTime;
-
-                        FallingNote fallingNote = SpawnFallingNote(fallingNoteData);
-                        _fallingNotes.Add(fallingNote);
-                        break;
-                    default:
-                        Debug.LogError($"Acao nao reconhecida: {actionStr}");
-                        break;
+                    fallingNoteData.EndingTick = i;
+                    fallingNoteData.AccumulatedDeltaTimeEnd = accumulatedDeltaTime;
+                    
+                    FallingNote fallingNote = SpawnFallingNote(fallingNoteData);
+                    _fallingNotes.Add(fallingNote);
+                }
+                else
+                {
+                    Debug.LogError($"Acao nao reconhecida: {actionStr}");
                 }
             }
         }
@@ -127,7 +124,9 @@ public class PlayingSongController
         GameObject fallingNoteObj = UnityEngine.Object.Instantiate(_fallingNotePrefab);
         FallingNote fallingNote = fallingNoteObj.GetComponent<FallingNote>();
 
-        fallingNote.Init(_keysMap[fallingNoteData.Key], fallingNoteData.AccumulatedDeltaTimeStart, fallingNoteData.AccumulatedDeltaTimeEnd, _data.ppqn, _data.bpm);
+        Color noteColor = _keysMap[fallingNoteData.Key].GetTutorialColor(Config.USE_LIGHTS_KEYBOARD, fallingNoteData.LeftHandPressed);
+
+        fallingNote.Init(_keysMap[fallingNoteData.Key], fallingNoteData.AccumulatedDeltaTimeStart, fallingNoteData.AccumulatedDeltaTimeEnd, _data.ppqn, _data.bpm, noteColor);
         return fallingNote;
     }
 
