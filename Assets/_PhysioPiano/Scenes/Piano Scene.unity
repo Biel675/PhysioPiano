@@ -6404,7 +6404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <TutorialCountdownText>k__BackingField: {fileID: 766475754}
-  _fallingNotePrefab: {fileID: 2423651855306698883, guid: 0c0e0a5c0ba2d29428650144255002bc, type: 3}
+  _fallingNotePrefab: {fileID: 8202210827552818976, guid: 5570cc7750135e241b97618bb44cb86f, type: 3}
   _correctPressParticle: {fileID: 1364675996}
   _latePressParticle: {fileID: 21888096}
   _missedPressParticle: {fileID: 1677478959}

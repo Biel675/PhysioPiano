@@ -14,7 +14,7 @@ public class FallingNote : MonoBehaviour
         float length = key.transform.localScale.x;
         float quarterNotes = (float) (accumulatedDeltaTimeEnd - accumulatedDeltaTimeStart) / ppqn;
         float height = length * quarterNotes;
-        transform.localScale = new Vector3(length, height, 0);
+        transform.localScale = new Vector3(length, height, transform.localScale.z);
 
         _endingY = key.transform.position.y + (key.transform.localScale.y / 2f) + _noteBaseOffset;
         float timeOffset = (float) accumulatedDeltaTimeStart / ppqn * length;
