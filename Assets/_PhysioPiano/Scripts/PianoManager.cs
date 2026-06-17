@@ -6,7 +6,6 @@ public class PianoManager : MonoBehaviour
 {
     private readonly Dictionary<string, PianoKey> _keysMap = new();
 
-    private static float TutorialCountdown { get; set; } = 10f;
     public string TutorialCountdownMessage { get; private set; } = "%seconds_remaining%\nSe prepare!";
     [field: SerializeField] public TextMeshPro TutorialCountdownText { get; set; }
 
@@ -66,6 +65,6 @@ public class PianoManager : MonoBehaviour
 
     public void LoadSong(SongData data)
     {
-        SongController = new(data, TutorialCountdown, this, _keysMap, _fallingNotePrefab, _correctPressParticle, _latePressParticle, _missedPressParticle);
+        SongController = new(data, Config.TUTORIAL_COOLDOWN_SECS, this, _keysMap, _fallingNotePrefab, _correctPressParticle, _latePressParticle, _missedPressParticle);
     }
 }

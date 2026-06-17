@@ -4,13 +4,10 @@ public class FallingNote : MonoBehaviour
 {
     private float _endingY;
     private float _speed;
-    private PlayingSongController _songController;
     [SerializeField] private float _noteBaseOffset = 0f;
 
-    public void Init(PlayingSongController songController, PianoKey key, int accumulatedDeltaTimeStart, int accumulatedDeltaTimeEnd, int ppqn, float bpm)
+    public void Init(PianoKey key, int accumulatedDeltaTimeStart, int accumulatedDeltaTimeEnd, int ppqn, float bpm)
     {
-        _songController = songController;
-
         float length = key.transform.localScale.x;
         float quarterNotes = (float) (accumulatedDeltaTimeEnd - accumulatedDeltaTimeStart) / ppqn;
         float height = length * quarterNotes;
@@ -27,16 +24,17 @@ public class FallingNote : MonoBehaviour
         transform.position = new Vector3(posX, posY, posZ);
     }
 
-    void Update()
+    public bool UpdatePosition()
     {
-        if (!_songController.IsCountdownComplete()) return;
-
         transform.position += _speed * Time.deltaTime * Vector3.down;
 
         float topPosY = transform.position.y + transform.localScale.y / 2f;
         if (topPosY < _endingY)
         {
             Destroy(gameObject);
+            return false;
         }
+
+        return true;
     }
 }

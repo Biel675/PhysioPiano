@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayingSongController
@@ -12,7 +13,7 @@ public class PlayingSongController
     private int _currentTick;
     private readonly float _secondsPerTick;
 
-    private readonly HashSet<FallingNoteData> _fallingNotes = new();
+    private readonly HashSet<FallingNote> _fallingNotes = new();
     private readonly GameObject _fallingNotePrefab;
 
     private PianoPlayingMode _playingMode = PianoPlayingMode.NONE;
@@ -21,6 +22,8 @@ public class PlayingSongController
     private readonly HashSet<string> _previouslyPressedKeys = new();
     private readonly HashSet<string> _currentTickReleasedKeys = new();
     private readonly HashSet<string> _previouslyReleasedKeys = new();
+
+    private readonly HashSet<string> _playerPressedKeys = new();
 
     private readonly PianoManager _pianoManager;
     private readonly Dictionary<string, PianoKey> _keysMap;
@@ -107,7 +110,9 @@ public class PlayingSongController
 
                         fallingNoteData.EndingTick = i;
                         fallingNoteData.AccumulatedDeltaTimeEnd = accumulatedDeltaTime;
-                        _fallingNotes.Add(fallingNoteData);
+
+                        FallingNote fallingNote = SpawnFallingNote(fallingNoteData);
+                        _fallingNotes.Add(fallingNote);
                         break;
                     default:
                         Debug.LogError($"Acao nao reconhecida: {actionStr}");
@@ -115,23 +120,32 @@ public class PlayingSongController
                 }
             }
         }
-
-        foreach (FallingNoteData fallingNoteData in _fallingNotes)
-        {
-            SpawnFallingNote(fallingNoteData);
-        }
     }
 
-    private void SpawnFallingNote(FallingNoteData fallingNoteData)
+    private FallingNote SpawnFallingNote(FallingNoteData fallingNoteData)
     {
         GameObject fallingNoteObj = UnityEngine.Object.Instantiate(_fallingNotePrefab);
         FallingNote fallingNote = fallingNoteObj.GetComponent<FallingNote>();
 
-        fallingNote.Init(this, _keysMap[fallingNoteData.Key], fallingNoteData.AccumulatedDeltaTimeStart, fallingNoteData.AccumulatedDeltaTimeEnd, _data.ppqn, _data.bpm);
+        fallingNote.Init(_keysMap[fallingNoteData.Key], fallingNoteData.AccumulatedDeltaTimeStart, fallingNoteData.AccumulatedDeltaTimeEnd, _data.ppqn, _data.bpm);
+        return fallingNote;
     }
 
     private void UpdateSongPlayback(float deltaTime)
     {
+        if (_playingMode == PianoPlayingMode.GUIDED && Config.PAUSE_SONG_WHEN_AWAITING_INPUT)
+        {
+            foreach(string key in _currentTickPressedKeys)
+            {
+                if (!_playerPressedKeys.Contains(key)) return;
+            }
+
+            foreach (string key in _previouslyPressedKeys)
+            {
+                if (!_playerPressedKeys.Contains(key)) return;
+            }
+        }
+
         _timer += deltaTime;
 
         while (_currentTick < _data.ticks.Count)
@@ -158,6 +172,16 @@ public class PlayingSongController
             _timer -= targetTime;
             _currentTick++;
         }
+
+        HashSet<FallingNote> removedFallingNotes = new();
+        foreach (FallingNote fallingNote in _fallingNotes.ToList())
+        {
+            if (!fallingNote.UpdatePosition())
+            {
+                removedFallingNotes.Add(fallingNote);
+            }
+        }
+        _fallingNotes.ExceptWith(removedFallingNotes);
     }
 
     private void ExecuteTickCommands(TickData tick)
@@ -235,6 +259,7 @@ public class PlayingSongController
 
     public void KeyCommand(string key, Vector3 pos, TickCommandAction command)
     {
+
         ParticleSystem particle = null;
         if (command == TickCommandAction.ON)
         {
@@ -253,6 +278,8 @@ public class PlayingSongController
                 particle = _missedPressParticle;
                 Debug.Log($"ERRO: {key} ON");
             }
+
+            _playerPressedKeys.Add(key);
         }
         else if (command == TickCommandAction.OFF)
         {
@@ -271,6 +298,8 @@ public class PlayingSongController
                 particle = _missedPressParticle;
                 Debug.Log($"ERRO: {key} OFF");
             }
+
+            _playerPressedKeys.Remove(key);
         }
 
         if (particle == null) return;
