@@ -10,6 +10,8 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField] private GameObject _mainCamera;
     private const string MENUS_SCENE_NAME = "Menus Scene";
 
+    private readonly float _moveSpeed = 0.5f;
+
     void Start()
     {
         xrOrigin = _xrOriginObj.GetComponent<XROrigin>();
@@ -23,5 +25,19 @@ public class PlayerInputController : MonoBehaviour
             PlayerPosition = _mainCamera.transform.position;
             SceneManager.LoadScene(MENUS_SCENE_NAME);
         }
+
+        float horizontal = Input.GetAxis("Horizontal") * _moveSpeed * Time.deltaTime;
+        float vertical = Input.GetAxis("Vertical") * _moveSpeed * Time.deltaTime;
+        float upDown = 0f;
+        if (Input.GetKey(KeyCode.E))
+        {
+            upDown = _moveSpeed * Time.deltaTime;
+        }
+        else if (Input.GetKey(KeyCode.Q))
+        {
+            upDown = -_moveSpeed * Time.deltaTime;
+        }
+
+        _mainCamera.transform.Translate(horizontal, upDown, vertical);
     }
 }
