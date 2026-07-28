@@ -4,7 +4,8 @@ using Unity.XR.CoreUtils;
 
 public class PlayerInputController : MonoBehaviour
 {
-    public static Vector3 PlayerPosition { get; set; } = new(0, 1.5f, -1f);
+    private static bool _hasPlayerPositionLoaded = false;
+    public static Vector3 PlayerPosition { get; set; }
     [SerializeField] private GameObject _xrOriginObj;
     private XROrigin xrOrigin;
     [SerializeField] private GameObject _mainCamera;
@@ -15,19 +16,23 @@ public class PlayerInputController : MonoBehaviour
     void Start()
     {
         xrOrigin = _xrOriginObj.GetComponent<XROrigin>();
-        xrOrigin.MoveCameraToWorldLocation(PlayerPosition);
+        if (_hasPlayerPositionLoaded)
+        {
+            _xrOriginObj.transform.position = PlayerPosition;
+        }
     }
     
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            PlayerPosition = _mainCamera.transform.position;
+            PlayerPosition = _xrOriginObj.transform.position;
+            _hasPlayerPositionLoaded = true;
             SceneManager.LoadScene(MENUS_SCENE_NAME);
         }
 
-        float horizontal = Input.GetAxis("Horizontal") * _moveSpeed * Time.deltaTime;
-        float vertical = Input.GetAxis("Vertical") * _moveSpeed * Time.deltaTime;
+        float horizontal = -Input.GetAxis("Horizontal") * _moveSpeed * Time.deltaTime;
+        float vertical = -Input.GetAxis("Vertical") * _moveSpeed * Time.deltaTime;
         float upDown = 0f;
         if (Input.GetKey(KeyCode.E))
         {
@@ -38,6 +43,6 @@ public class PlayerInputController : MonoBehaviour
             upDown = -_moveSpeed * Time.deltaTime;
         }
 
-        _mainCamera.transform.Translate(horizontal, upDown, vertical);
+        _xrOriginObj.transform.Translate(horizontal, upDown, vertical);
     }
 }
