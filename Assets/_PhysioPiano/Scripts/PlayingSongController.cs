@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class PlayingSongController
 {
+    private readonly Config _config;
     private readonly SongData _data;
     private float _timer = 0f;
-    private readonly float _tutorialCountdownTime;
     private float _tutorialCounter;
 
     private int _currentTick;
@@ -28,12 +28,12 @@ public class PlayingSongController
     private readonly PianoManager _pianoManager;
     private readonly Dictionary<string, PianoKey> _keysMap;
 
-    public PlayingSongController(SongData data, float tutorialCountdownTime, PianoManager pianoManager, Dictionary<string, PianoKey> keysMap, GameObject fallingNotePrefab, ParticleSystem correctPressParticle, ParticleSystem latePressParticle, ParticleSystem missedPressParticle)
+    public PlayingSongController(Config config, SongData data, PianoManager pianoManager, Dictionary<string, PianoKey> keysMap, GameObject fallingNotePrefab, ParticleSystem correctPressParticle, ParticleSystem latePressParticle, ParticleSystem missedPressParticle)
     {
+        _config = config;
         _data = data;
         _pianoManager = pianoManager;
         _keysMap = keysMap;
-        _tutorialCountdownTime = tutorialCountdownTime;
         _fallingNotePrefab = fallingNotePrefab;
         
         _correctPressParticle = correctPressParticle;
@@ -124,7 +124,7 @@ public class PlayingSongController
         GameObject fallingNoteObj = UnityEngine.Object.Instantiate(_fallingNotePrefab);
         FallingNote fallingNote = fallingNoteObj.GetComponent<FallingNote>();
 
-        Color noteColor = _keysMap[fallingNoteData.Key].GetTutorialColor(Config.USE_LIGHTS_KEYBOARD, fallingNoteData.LeftHandPressed);
+        Color noteColor = _keysMap[fallingNoteData.Key].GetTutorialColor(_config.UseLightsKeyboard, fallingNoteData.LeftHandPressed);
 
         fallingNote.Init(_keysMap[fallingNoteData.Key], fallingNoteData.AccumulatedDeltaTimeStart, fallingNoteData.AccumulatedDeltaTimeEnd, _data.ppqn, _data.bpm, noteColor);
         return fallingNote;
@@ -132,7 +132,7 @@ public class PlayingSongController
 
     private void UpdateSongPlayback(float deltaTime)
     {
-        if (_playingMode == PianoPlayingMode.GUIDED && Config.PAUSE_SONG_WHEN_AWAITING_INPUT)
+        if (_playingMode == PianoPlayingMode.GUIDED && _config.PauseSongWhenWaitingForInput)
         {
             foreach(string key in _currentTickPressedKeys)
             {
@@ -314,7 +314,13 @@ public class PlayingSongController
     private void SetupSong(PianoPlayingMode playingMode)
     {
         _timer = 0f;
-        _tutorialCounter = _tutorialCountdownTime;
+        _tutorialCounter = _config.TutorialCooldownSeconds;
+        
+        TickData delayedFirstTick = new();
+        delayedFirstTick.cmd = new List<string>();
+        delayedFirstTick.deltaTime = (int) (_config.SongFirstTickDelaySeconds / _secondsPerTick); 
+        _data.ticks.Insert(0, delayedFirstTick);
+        
         _currentTick = 0;
         _playingMode = playingMode;
 

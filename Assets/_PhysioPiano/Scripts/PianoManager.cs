@@ -4,9 +4,10 @@ using TMPro;
 
 public class PianoManager : MonoBehaviour
 {
+    private Config _config = Config.INSTANCE;
     private readonly Dictionary<string, PianoKey> _keysMap = new();
 
-    public string TutorialCountdownMessage { get; private set; } = "%seconds_remaining%\nSe prepare!";
+    public string TutorialCountdownMessage { get; private set; } = "Prepare-se!\n%seconds_remaining%";
     [field: SerializeField] public TextMeshPro TutorialCountdownText { get; set; }
 
     public PlayingSongController SongController { get; private set; } = null;
@@ -44,7 +45,7 @@ public class PianoManager : MonoBehaviour
         {
             string keyNote = key.name.Split("_")[1];
             _keysMap.Add(keyNote, key);
-            key.Init(this, _pressedKeyColor, _tutorialKeyColor, _tutorialLeftKeyColor);
+            key.Init(_config, this, _pressedKeyColor, _tutorialKeyColor, _tutorialLeftKeyColor);
         }
 
         Debug.Log("Piano carregado com " + _keysMap.Count + " teclas");
@@ -69,6 +70,6 @@ public class PianoManager : MonoBehaviour
 
     public void LoadSong(SongData data)
     {
-        SongController = new(data, Config.TUTORIAL_COOLDOWN_SECS, this, _keysMap, _fallingNotePrefab, _correctPressParticle, _latePressParticle, _missedPressParticle);
+        SongController = new(_config, data, this, _keysMap, _fallingNotePrefab, _correctPressParticle, _latePressParticle, _missedPressParticle);
     }
 }

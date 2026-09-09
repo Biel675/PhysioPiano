@@ -7,6 +7,8 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class PianoKey : MonoBehaviour
 {
+    private Config _config;
+    
     public float maxDepression = 0.02f;
     public float maxAngle = 5f;
     public float rotationSpeed = 15f;
@@ -29,8 +31,9 @@ public class PianoKey : MonoBehaviour
     private bool _isFlickering = false;
     private static readonly float FLICKER_DURATION_SECS = 0.1f;
 
-    public void Init(PianoManager pianoManager, Color pressedKeyColor, Color tutorialKeyColor, Color tutorialLeftKeyColor)
+    public void Init(Config config, PianoManager pianoManager, Color pressedKeyColor, Color tutorialKeyColor, Color tutorialLeftKeyColor)
     {
+        _config = config;
         _pianoManager = pianoManager;
         _pressedKeyColor = pressedKeyColor;
         _tutorialKeyColor = tutorialKeyColor;
@@ -159,7 +162,7 @@ public class PianoKey : MonoBehaviour
         else
         {
             bool isLeftHand = _state == KeyState.TUTORIAL_LEFT || _state == KeyState.GUIDED_LEFT;
-            _objectRenderer.material.color = GetTutorialColor(Config.USE_LIGHTS_KEYBOARD, isLeftHand);
+            _objectRenderer.material.color = GetTutorialColor(_config.UseLightsKeyboard, isLeftHand);
         }
     }
 
