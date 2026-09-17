@@ -23,7 +23,7 @@ public class FallingNote : MonoBehaviour
         float posZ = key.transform.position.z - key.transform.localScale.z / 2f;
         transform.position = new Vector3(posX, posY, posZ);
 
-        Renderer coloredNoteRenderer = transform.Find("Note").GetComponent<Renderer>();
+        Renderer coloredNoteRenderer = transform.Find("Cube").GetComponent<Renderer>();
         coloredNoteRenderer.material.color = color;
     }
 
