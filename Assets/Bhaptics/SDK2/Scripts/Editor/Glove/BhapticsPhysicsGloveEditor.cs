@@ -1,4 +1,6 @@
 ﻿using Bhaptics.SDK2.Glove;
+using System;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,30 +9,69 @@ namespace Bhaptics.SDK2
     [CustomEditor(typeof(BhapticsPhysicsGlove))]
     public class BhapticsPhysicsGloveEditor : UnityEditor.Editor
     {
-        private const string SettingsPathBase = "Assets/Bhaptics/SDK2/Resources/GloveHapticSettings";
+        private const string SettingsFileName = "GloveHapticSettings";
         private const string SettingsExtension = ".asset";
+
+        private static string sdkRoot;
+        private static string SdkRoot
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(sdkRoot))
+                {
+                    return sdkRoot;
+                }
+                
+                var  temp   = ScriptableObject.CreateInstance<BhapticsPhysicsGloveEditor>();
+                var  monoScr  = MonoScript.FromScriptableObject(temp);
+                string scriptPath = AssetDatabase.GetAssetPath(monoScr);
+                UnityEngine.Object.DestroyImmediate(temp);
+                
+                int idx = scriptPath.LastIndexOf("/SDK2/", StringComparison.OrdinalIgnoreCase);
+                if (idx >= 0)
+                {
+                    sdkRoot = scriptPath.Substring(0, idx + "/SDK2/".Length).TrimEnd('/');
+                }
+                else
+                {
+                    sdkRoot = "Assets/Bhaptics/SDK2";
+                }
+
+                return sdkRoot;
+            }
+        }
+
+        private static string BuildAssetPath(int? suffix = null)
+        {
+            string name = SettingsFileName + (suffix.HasValue ? $" {suffix}" : "") + SettingsExtension;
+            return Path.Combine(SdkRoot, "Resources", name).Replace("\\", "/");
+        }
 
         private BhapticsPhysicsGloveSettings LoadOrCreateSettingsAsset()
         {
-            string settingsPath = SettingsPathBase + SettingsExtension;
+            string[] guids = AssetDatabase.FindAssets($"t:{nameof(BhapticsPhysicsGloveSettings)}", new[] { Path.Combine(SdkRoot, "Resources") });
 
-            if (System.IO.File.Exists(settingsPath))
+            if (guids.Length > 0)
             {
-                int count = 1;
-                while (true)
-                {
-                    settingsPath = $"{SettingsPathBase} {count}{SettingsExtension}";
-
-                    if (!System.IO.File.Exists(settingsPath))
-                    {
-                        break;
-                    }
-                    
-                    count++;
-                }
+                string firstPath = AssetDatabase.GUIDToAssetPath(guids[0]);
+                return AssetDatabase.LoadAssetAtPath<BhapticsPhysicsGloveSettings>(firstPath);
             }
+
+            int suffix = 0;
+            string assetPath = BuildAssetPath();
+            string osPath = Path.Combine(Directory.GetCurrentDirectory(), assetPath);
+
+            while (File.Exists(osPath))
+            {
+                suffix++;
+                assetPath = BuildAssetPath(suffix);
+                osPath = Path.Combine(Directory.GetCurrentDirectory(), assetPath);
+            }
+
+            Directory.CreateDirectory(Path.GetDirectoryName(osPath));
+
             var settings = ScriptableObject.CreateInstance<BhapticsPhysicsGloveSettings>();
-            AssetDatabase.CreateAsset(settings, settingsPath);
+            AssetDatabase.CreateAsset(settings, assetPath);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 
@@ -50,10 +91,10 @@ namespace Bhaptics.SDK2
 
             if (controller.HapticSettings == null)
             {
-                if (GUILayout.Button(new GUIContent("Create New GloveHapticSettings", "Creates a new GloveHapticSettings asset in the path: Assets/Bhaptics/SDK2/Resources")))
+                if (GUILayout.Button(new GUIContent("Create New GloveHapticSettings", "Creates a new GloveHapticSettings asset in the path: SDK2/Resources")))
                 {
                     controller.HapticSettings = LoadOrCreateSettingsAsset();
-                    EditorUtility.SetDirty(controller);  // Mark the controller as dirty to save the changes
+                    EditorUtility.SetDirty(controller);
                 }
             }
             else

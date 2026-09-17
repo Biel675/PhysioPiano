@@ -131,7 +131,7 @@ namespace Bhaptics.SDK2.Universal
 
         }
 
-        public int PlayWaveform(int position, int requestId, int[] motorValues, int[] playTimeValues, int[] shapeValues)
+        public int PlayWaveform(int position, int requestId, int[] motorValues, int[] playTimeValues, int[] shapeValues, int frequency, int repeatCount)
         {
             if (!connected)
             {
@@ -144,7 +144,9 @@ namespace Bhaptics.SDK2.Universal
                 pos = position,
                 motorValues = motorValues,
                 playTimeValues = playTimeValues,
-                shapeValues = shapeValues
+                shapeValues = shapeValues,
+                frequency = frequency,
+                repeatCount = repeatCount
             };
             var message = TactHubMessage.SdkPlayWaveformMode(playWaveformMessage);
 

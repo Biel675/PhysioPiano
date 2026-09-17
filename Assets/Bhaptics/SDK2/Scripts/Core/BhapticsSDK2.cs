@@ -12,7 +12,7 @@ namespace Bhaptics.SDK2
         [Header("Only for PC")]
         [Tooltip("If bHaptics Player(PC) is not turned on when this program starts, it automatically runs bHaptics Player.")]
         [SerializeField] private bool autoRunBhapticsPlayer = false;
-        private bool autoRequestBluetoothPermission = true;
+        private bool autoRequestBluetoothPermission = false;
 
         private BhapticsSettings bhapticsSettings;
 
@@ -64,10 +64,18 @@ namespace Bhaptics.SDK2
         {
             IsInitialized = false;
 
+            IsInitialized = false;
+
+#if UNITY_6000_4_OR_NEWER
+            if (instance == null || instance.GetEntityId() != this.GetEntityId())
+#else
             if (instance == null || instance.GetInstanceID() != this.GetInstanceID())
+#endif
             {
                 return;
             }
+
+            BhapticsLibrary.Destroy();
 
             BhapticsLibrary.Destroy();
             

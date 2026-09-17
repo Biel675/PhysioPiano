@@ -22,7 +22,7 @@ namespace Bhaptics.SDK2.Scripts.Editor
         public static bool EditorReInitialize(string appId, string apiKey, string json)
         {
             BhapticsLogManager.LogFormat("[bHaptics] BhapticsLibrary - ReInitialize() {0} {1}", apiKey, appId);
-            return bhaptics_library.reInitMessage(apiKey, appId, json);
+            return bhaptics_library.registryAndInit(apiKey, appId, json);
         }
 
     }

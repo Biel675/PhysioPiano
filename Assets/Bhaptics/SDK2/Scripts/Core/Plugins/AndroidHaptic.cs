@@ -12,6 +12,7 @@ namespace Bhaptics.SDK2
 
         private static readonly object[] GetEventIdParams = new object[1];
         private static readonly object[] PlayGloveParams = new object[5];
+        private static readonly object[] PlayGloveDK3Params = new object[7];
         private static readonly object[] PlayPathParams = new object[5];
         private static readonly jvalue[] PlayEventParams = new jvalue[6];
         private static readonly jvalue[] PlayEventWithStartMillisParams = new jvalue[7];
@@ -38,6 +39,7 @@ namespace Bhaptics.SDK2
         private readonly IntPtr playMotorsPtr;
         private readonly IntPtr playLoopPtr;
         private readonly IntPtr playGlovePtr;
+        private readonly IntPtr playGloveDk3Ptr;
         private readonly IntPtr playPathPtr;
         private readonly IntPtr playWithStartMillisPtr;
         
@@ -82,6 +84,7 @@ namespace Bhaptics.SDK2
                 playEventPtr = AndroidJNIHelper.GetMethodID(bhapticsWrapperClassPtr, "playEvent", "(IIFFFF)I");
                 playWithStartMillisPtr = AndroidJNIHelper.GetMethodID(bhapticsWrapperClassPtr, "playWithStartTime", "(IIIFFFF)I");
                 playGlovePtr = AndroidJNIHelper.GetMethodID(bhapticsWrapperClassPtr, "playGlove", "(I[I[I[II)I");
+                playGloveDk3Ptr = AndroidJNIHelper.GetMethodID(bhapticsWrapperClassPtr, "playGloveDK3", "(I[I[I[IIII)I");
                 playPathPtr = AndroidJNIHelper.GetMethodID(bhapticsWrapperClassPtr,"playPath", "(II[F[F[I)I");
                 getEventIdPtr = AndroidJNIHelper.GetMethodID(bhapticsWrapperClassPtr, "getEventId", "(Ljava/lang/String;)I");
                 playLoopPtr = AndroidJNIHelper.GetMethodID(bhapticsWrapperClassPtr, "playLoop", "(IIFFFFII)I");
@@ -288,6 +291,24 @@ namespace Bhaptics.SDK2
             PlayGloveParams[4] = 6;
 
             return AndroidUtils.CallNativeIntMethod(bhapticsWrapperObjectPtr, playGlovePtr, PlayGloveParams);
+        }
+
+        public int PlayGloveDK3(int position, int[] motors, int[] playTimeValues, int[] shapeValues, int frequency, int repeatCount)
+        {
+            if (androidJavaObject == null)
+            {
+                return -1;
+            }
+
+            PlayGloveDK3Params[0] = position;
+            PlayGloveDK3Params[1] = motors;
+            PlayGloveDK3Params[2] = playTimeValues;
+            PlayGloveDK3Params[3] = shapeValues;
+            PlayGloveDK3Params[4] = frequency;
+            PlayGloveDK3Params[5] = repeatCount;
+            PlayGloveDK3Params[6] = motors.Length;
+
+            return AndroidUtils.CallNativeIntMethod(bhapticsWrapperObjectPtr, playGloveDk3Ptr, PlayGloveDK3Params);
         }
 
         public int PlayPath(int position, float[] xValues, float[] yValues, int[] intensityValues, int duration)

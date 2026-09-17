@@ -85,6 +85,8 @@ namespace Bhaptics.SDK2.Universal
         public int[] motorValues;
         public int[] playTimeValues;
         public int[] shapeValues;
+        public int frequency = 0;
+        public int repeatCount = 0;
     }
 
     [Serializable]

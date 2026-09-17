@@ -12,6 +12,8 @@ namespace Bhaptics.SDK2.Glove
     {
         private const float MotorIntensityCorrectionWithDecay = 0.8f;
         private const float MotorIntensityCorrectionWithoutDecay = 0.5f;
+        private int[] leftPreviousMotorValues = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+        private int[] rightPreviousMotorValues = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
 
         private static  BhapticsPhysicsGlove instance;
         public static BhapticsPhysicsGlove Instance 
@@ -71,7 +73,7 @@ namespace Bhaptics.SDK2.Glove
         /// </param>
         /// <param name="fingerIndex">Index of the finger.
         /// <para>0 = ThumbTip / 1 = IndexTip / 2 = MiddleTip / 3 = RingTip / 4 = LittleTip</para>
-        /// <para>5 = Wrist</para>
+        /// <para>5 = Wrist / 6 = Palm (below thumb) / 7 = Palm (below pinky)</para>
         /// </param>
         /// <param name="intensity">Intensity of the haptic feedback.</param>
         private void PlayHaptic(PositionType position, int fingerIndex, float intensity)
@@ -90,7 +92,7 @@ namespace Bhaptics.SDK2.Glove
                 return;
             }
 
-            var dots = new int[6] { 0, 0, 0, 0, 0, 0 };
+            var dots = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
             dots[fingerIndex] = Mathf.RoundToInt(intensity * HapticVolume);
 
             if (position == PositionType.GloveL)
@@ -112,7 +114,7 @@ namespace Bhaptics.SDK2.Glove
         /// <param name="isLeft">Indicates if the left glove is used.</param>
         /// <param name="fingerIndex">Index of the finger.
         /// <para>0 = ThumbTip / 1 = IndexTip / 2 = MiddleTip / 3 = RingTip / 4 = LittleTip</para>
-        /// <para>5 = Wrist</para>
+        /// <para>5 = Wrist / 6 = Palm (below thumb) / 7 = Palm (below pinky)</para>
         /// </param>
         public void SendEnterHaptic(bool isLeft, int fingerIndex)
         {
@@ -124,7 +126,7 @@ namespace Bhaptics.SDK2.Glove
         /// <param name="isLeft">Indicates if the left glove is used.</param>
         /// <param name="fingerIndex">Index of the finger.
         /// <para>0 = ThumbTip / 1 = IndexTip / 2 = MiddleTip / 3 = RingTip / 4 = LittleTip</para>
-        /// <para>5 = Wrist</para>
+        /// <para>5 = Wrist / 6 = Palm (below thumb) / 7 = Palm (below pinky)</para>
         /// </param>
         /// <param name="collision">Collision data.</param>
         public void SendEnterHaptic(bool isLeft, int fingerIndex, Collision collision)
@@ -138,7 +140,7 @@ namespace Bhaptics.SDK2.Glove
         /// <param name="isLeft">Indicates if the left glove is used.</param>
         /// <param name="fingerIndex">Index of the finger.
         /// <para>0 = ThumbTip / 1 = IndexTip / 2 = MiddleTip / 3 = RingTip / 4 = LittleTip</para>
-        /// <para>5 = Wrist</para>
+        /// <para>5 = Wrist / 6 = Palm (below thumb) / 7 = Palm (below pinky)</para>
         /// </param>
         /// <param name="velocity">Velocity data.</param>
         public void SendEnterHaptic(bool isLeft, int fingerIndex, Vector3 velocity)
@@ -155,7 +157,7 @@ namespace Bhaptics.SDK2.Glove
         /// </param>
         /// <param name="fingerIndex">Index of the finger.
         /// <para>0 = ThumbTip / 1 = IndexTip / 2 = MiddleTip / 3 = RingTip / 4 = LittleTip</para>
-        /// <para>5 = Wrist</para>
+        /// <para>5 = Wrist / 6 = Palm (below thumb) / 7 = Palm (below pinky)</para>
         /// </param>
         public void SendEnterHaptic(PositionType position, int fingerIndex)
         {
@@ -171,7 +173,7 @@ namespace Bhaptics.SDK2.Glove
         /// </param>
         /// <param name="fingerIndex">Index of the finger.
         /// <para>0 = ThumbTip / 1 = IndexTip / 2 = MiddleTip / 3 = RingTip / 4 = LittleTip</para>
-        /// <para>5 = Wrist</para>
+        /// <para>5 = Wrist / 6 = Palm (below thumb) / 7 = Palm (below pinky)</para>
         /// </param>
         /// <param name="collision">Collision data.</param>
         public void SendEnterHaptic(PositionType position, int fingerIndex, Collision collision)
@@ -188,7 +190,7 @@ namespace Bhaptics.SDK2.Glove
         /// </param>
         /// <param name="fingerIndex">Index of the finger.
         /// <para>0 = ThumbTip / 1 = IndexTip / 2 = MiddleTip / 3 = RingTip / 4 = LittleTip</para>
-        /// <para>5 = Wrist</para>
+        /// <para>5 = Wrist / 6 = Palm (below thumb) / 7 = Palm (below pinky)</para>
         /// </param>
         /// <param name="velocity">Velocity data.</param>
         public void SendEnterHaptic(PositionType position, int fingerIndex, Vector3 velocity)
@@ -214,6 +216,8 @@ namespace Bhaptics.SDK2.Glove
                     break;
             }
 
+            var targetMotorValues = (position == PositionType.GloveL) ? leftPreviousMotorValues : rightPreviousMotorValues;
+            targetMotorValues[fingerIndex] = (int)motorValue;
             PlayHaptic(position, fingerIndex, motorValue);
         }
         #endregion
@@ -225,7 +229,7 @@ namespace Bhaptics.SDK2.Glove
         /// <param name="isLeft">Indicates if the left glove is used.</param>
         /// <param name="fingerIndex">Index of the finger.
         /// <para>0 = ThumbTip / 1 = IndexTip / 2 = MiddleTip / 3 = RingTip / 4 = LittleTip</para>
-        /// <para>5 = Wrist</para>
+        /// <para>5 = Wrist / 6 = Palm (below thumb) / 7 = Palm (below pinky)</para>
         /// </param>
         public void SendStayHaptic(bool isLeft, int fingerIndex)
         {
@@ -238,7 +242,7 @@ namespace Bhaptics.SDK2.Glove
         /// <param name="isLeft">Indicates if the left glove is used.</param>
         /// <param name="fingerIndex">Index of the finger.
         /// <para>0 = ThumbTip / 1 = IndexTip / 2 = MiddleTip / 3 = RingTip / 4 = LittleTip</para>
-        /// <para>5 = Wrist</para>
+        /// <para>5 = Wrist / 6 = Palm (below thumb) / 7 = Palm (below pinky)</para>
         /// </param>
         /// <param name="slaveTransform">Slave transform data.</param>
         /// <param name="masterTransform">Master transform data.</param>
@@ -253,7 +257,7 @@ namespace Bhaptics.SDK2.Glove
         /// <param name="position">Position type (left or right glove).</param>
         /// <param name="fingerIndex">Index of the finger.
         /// <para>0 = ThumbTip / 1 = IndexTip / 2 = MiddleTip / 3 = RingTip / 4 = LittleTip</para>
-        /// <para>5 = Wrist</para>
+        /// <para>5 = Wrist / 6 = Palm (below thumb) / 7 = Palm (below pinky)</para>
         /// </param>
         public void SendStayHaptic(PositionType position, int fingerIndex)
         {
@@ -269,24 +273,25 @@ namespace Bhaptics.SDK2.Glove
         /// </param>
         /// <param name="fingerIndex">Index of the finger.
         /// <para>0 = ThumbTip / 1 = IndexTip / 2 = MiddleTip / 3 = RingTip / 4 = LittleTip</para>
-        /// <para>5 = Wrist</para>
+        /// <para>5 = Wrist / 6 = Palm (below thumb) / 7 = Palm (below pinky)</para>
         /// </param>
         /// <param name="slaveTransform">Slave transform data.</param>
         /// <param name="masterTransform">Master transform data.</param>
         public void SendStayHaptic(PositionType position, int fingerIndex, Transform slaveTransform, Transform masterTransform)
         {
-            float motorValue = 0f;
+            float motorValue = 0;
+            var targetMotorValues = (position == PositionType.GloveL) ? leftPreviousMotorValues : rightPreviousMotorValues;
+            
             switch (hapticSettings.hapticMode)
             {
                 case BhapticsPhysicsGloveSettings.HapticMode.Mode1:
-
-                    motorValue = Mathf.Max(motorValue * Mathf.Pow(hapticSettings.decayRate, Time.fixedDeltaTime / hapticSettings.decayDelay), ((hapticSettings.motorIntensityMax - hapticSettings.motorIntensityMin) * Mathf.Pow((slaveTransform.position - masterTransform.position).magnitude, 2)) / Mathf.Pow(hapticSettings.masterSlaveDistanceMax / 100f, 2) + hapticSettings.motorIntensityMin);
+                    motorValue = Mathf.Max(targetMotorValues[fingerIndex] * Mathf.Pow(hapticSettings.decayRate, Time.fixedDeltaTime / hapticSettings.decayDelay), ((hapticSettings.motorIntensityMax - hapticSettings.motorIntensityMin) * Mathf.Pow((slaveTransform.position - masterTransform.position).magnitude, 2)) / Mathf.Pow(hapticSettings.masterSlaveDistanceMax / 100f, 2) + hapticSettings.motorIntensityMin);
                     motorValue = Mathf.Clamp(motorValue, hapticSettings.motorIntensityMin, hapticSettings.motorIntensityMax);
 
                     break;
                 case BhapticsPhysicsGloveSettings.HapticMode.Mode2:
 
-                    motorValue = Mathf.Max(motorValue * Mathf.Pow(hapticSettings.decayRate, Time.fixedDeltaTime / hapticSettings.decayDelay), hapticSettings.motorIntensityMin);
+                    motorValue = Mathf.Max(targetMotorValues[fingerIndex] * Mathf.Pow(hapticSettings.decayRate, Time.fixedDeltaTime / hapticSettings.decayDelay), hapticSettings.motorIntensityMin);
                     motorValue = Mathf.Clamp(motorValue, hapticSettings.motorIntensityMin, hapticSettings.motorIntensityMax);
 
                     break;
@@ -302,6 +307,7 @@ namespace Bhaptics.SDK2.Glove
                     break;
             }
 
+            targetMotorValues[fingerIndex] = (int)motorValue;
             PlayHaptic(position, fingerIndex, motorValue);
         }
 
@@ -311,7 +317,7 @@ namespace Bhaptics.SDK2.Glove
         /// <param name="isLeft">Indicates if the left glove is used.</param>
         /// <param name="fingerIndex">Index of the finger.
         /// <para>0 = ThumbTip / 1 = IndexTip / 2 = MiddleTip / 3 = RingTip / 4 = LittleTip</para>
-        /// <para>5 = Wrist</para>
+        /// <para>5 = Wrist / 6 = Palm (below thumb) / 7 = Palm (below pinky)</para>
         /// </param>
         /// <param name="relativeDistance">Relative distance data.</param>
         public void SendStayHaptic(bool isLeft, int fingerIndex, float relativeDistance)
@@ -328,25 +334,26 @@ namespace Bhaptics.SDK2.Glove
         /// </param>
         /// <param name="fingerIndex">Index of the finger.
         /// <para>0 = ThumbTip / 1 = IndexTip / 2 = MiddleTip / 3 = RingTip / 4 = LittleTip</para>
-        /// <para>5 = Wrist</para>
+        /// <para>5 = Wrist / 6 = Palm (below thumb) / 7 = Palm (below pinky)</para>
         /// </param>
         /// <param name="relativeDistance">Relative distance data.</param>
         public void SendStayHaptic(PositionType position, int fingerIndex, float relativeDistance)
         {
-
-            float motorValue = 0f;
+            float motorValue = 0;
+            var targetMotorValues = (position == PositionType.GloveL) ? leftPreviousMotorValues : rightPreviousMotorValues;
+                        
             switch (hapticSettings.hapticMode)
             {
                 case BhapticsPhysicsGloveSettings.HapticMode.Mode1:
 
-                    motorValue = Mathf.Max(motorValue * Mathf.Pow(hapticSettings.decayRate, Time.fixedDeltaTime / hapticSettings.decayDelay), (hapticSettings.motorIntensityMax - hapticSettings.motorIntensityMin) * Mathf.Pow(relativeDistance, 2) / Mathf.Pow(hapticSettings.masterSlaveDistanceMax / 100f, 2) + hapticSettings.motorIntensityMin);
+                    motorValue = Mathf.Max(targetMotorValues[fingerIndex] * Mathf.Pow(hapticSettings.decayRate, Time.fixedDeltaTime / hapticSettings.decayDelay), (hapticSettings.motorIntensityMax - hapticSettings.motorIntensityMin) * Mathf.Pow(relativeDistance, 2) / Mathf.Pow(hapticSettings.masterSlaveDistanceMax / 100f, 2) + hapticSettings.motorIntensityMin);
                     motorValue = Mathf.Clamp(motorValue, hapticSettings.motorIntensityMin, hapticSettings.motorIntensityMax);
 
                     break;
 
                 case BhapticsPhysicsGloveSettings.HapticMode.Mode2:
 
-                    motorValue = Mathf.Max(motorValue * Mathf.Pow(hapticSettings.decayRate, Time.fixedDeltaTime / hapticSettings.decayDelay), hapticSettings.motorIntensityMin);
+                    motorValue = Mathf.Max(targetMotorValues[fingerIndex] * Mathf.Pow(hapticSettings.decayRate, Time.fixedDeltaTime / hapticSettings.decayDelay), hapticSettings.motorIntensityMin);
                     motorValue = Mathf.Clamp(motorValue, hapticSettings.motorIntensityMin, hapticSettings.motorIntensityMax);
 
                     break;
@@ -364,6 +371,7 @@ namespace Bhaptics.SDK2.Glove
                     break;
             }
 
+            targetMotorValues[fingerIndex] = (int)motorValue;
             PlayHaptic(position, fingerIndex, motorValue);
         }
         #endregion
@@ -376,7 +384,7 @@ namespace Bhaptics.SDK2.Glove
         /// <param name="isLeft">Indicates if the left glove is used.</param>
         /// <param name="fingerIndex">Index of the finger.
         /// <para>0 = ThumbTip / 1 = IndexTip / 2 = MiddleTip / 3 = RingTip / 4 = LittleTip</para>
-        /// <para>5 = Wrist</para>
+        /// <para>5 = Wrist / 6 = Palm (below thumb) / 7 = Palm (below pinky)</para>
         /// </param>
         public void SendExitHaptic(bool isLeft, int fingerIndex)
         {
@@ -392,7 +400,7 @@ namespace Bhaptics.SDK2.Glove
         /// </param>
         /// <param name="fingerIndex">Index of the finger.
         /// <para>0 = ThumbTip / 1 = IndexTip / 2 = MiddleTip / 3 = RingTip / 4 = LittleTip</para>
-        /// <para>5 = Wrist</para>
+        /// <para>5 = Wrist / 6 = Palm (below thumb) / 7 = Palm (below pinky)</para>
         /// </param>
         public void SendExitHaptic(PositionType position, int fingerIndex)
         {
@@ -415,6 +423,8 @@ namespace Bhaptics.SDK2.Glove
                     break;
             }
 
+            var targetMotorValues = (position == PositionType.GloveL) ? leftPreviousMotorValues : rightPreviousMotorValues;
+            targetMotorValues[fingerIndex] = 0;
             PlayHaptic(position, fingerIndex, motorValue);
         }
         #endregion
