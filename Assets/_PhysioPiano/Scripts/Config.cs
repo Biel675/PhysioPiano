@@ -18,4 +18,7 @@ public class Config
     
     [field: SerializeField]
     public bool UseLightsKeyboard { get; set; } = false;
+
+    [field: SerializeField]
+    public bool FallingNotesUseFrontalPlane { get; set; } = false;
 }

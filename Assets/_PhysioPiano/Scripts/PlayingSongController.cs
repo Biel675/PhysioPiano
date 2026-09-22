@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class PlayingSongController
 {
@@ -126,7 +129,7 @@ public class PlayingSongController
 
         Color noteColor = _keysMap[fallingNoteData.Key].GetTutorialColor(_config.UseLightsKeyboard, fallingNoteData.LeftHandPressed);
 
-        fallingNote.Init(_keysMap[fallingNoteData.Key], fallingNoteData.AccumulatedDeltaTimeStart, fallingNoteData.AccumulatedDeltaTimeEnd, _data.ppqn, _data.bpm, noteColor);
+        fallingNote.Init(_config, _keysMap[fallingNoteData.Key], fallingNoteData.AccumulatedDeltaTimeStart, fallingNoteData.AccumulatedDeltaTimeEnd, _data.ppqn, _data.bpm, noteColor);
         return fallingNote;
     }
 
@@ -158,13 +161,21 @@ public class PlayingSongController
 
             if (_currentTick == _data.ticks.Count - 1)
             {
+                foreach (FallingNote fallingNote in _fallingNotes.ToList())
+                {
+                    Object.Destroy(fallingNote.gameObject);
+                    _fallingNotes.Remove(fallingNote);
+                }
+                
                 if (_playingMode == PianoPlayingMode.GUIDED)
                 {
                     _playingMode = PianoPlayingMode.NONE;
-                    return;
+                }
+                else
+                {
+                    SetupSong(PianoPlayingMode.GUIDED);
                 }
 
-                SetupSong(PianoPlayingMode.GUIDED);
                 return;
             }
 
