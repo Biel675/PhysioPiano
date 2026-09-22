@@ -94,7 +94,7 @@ public class PlayingSongController
                 if (!TryIdentifyActionAndKey(cmd, out string actionStr, out TickCommandAction action, out string keyName, out PianoKey key)) continue;
 
                 FallingNoteData fallingNoteData;
-                if (action == TickCommandAction.ON || action == TickCommandAction.ON_LEFT)
+                if (action == TickCommandAction.ON  ||action == TickCommandAction.ON_LEFT)
                 {
                     bool leftHandPressed = action == TickCommandAction.ON_LEFT;
                     fallingNoteData = new(keyName, leftHandPressed, i, accumulatedDeltaTime);

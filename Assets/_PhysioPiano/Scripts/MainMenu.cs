@@ -66,14 +66,14 @@ public class MainMenu : MonoBehaviour
 
     public void OnClickSelectFullPiano()
     {
-        PianoManager.CurrentPiano = "Full";
+        Config.INSTANCE.PianoConfiguration = "full";
         selectPianoMenu.SetActive(false);
         mainMenu.SetActive(true);
     }
 
     public void OnClickSelecctReducedPiano()
     {
-        PianoManager.CurrentPiano = "Reduced";
+        Config.INSTANCE.PianoConfiguration = "reduced";
         selectPianoMenu.SetActive(false);
         mainMenu.SetActive(true);
     }

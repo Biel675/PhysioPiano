@@ -21,4 +21,7 @@ public class Config
 
     [field: SerializeField]
     public bool FallingNotesUseFrontalPlane { get; set; } = false;
+
+    [field: SerializeField]
+    public string PianoConfiguration { get; set; } = "full";
 }
