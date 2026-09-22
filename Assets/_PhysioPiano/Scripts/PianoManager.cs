@@ -77,15 +77,20 @@ public class PianoManager : MonoBehaviour
 
     private void PreloadPiano(string pianoOption)
     {
-        if (pianoOption == "full")
+        switch (pianoOption)
         {
-            _firstKey = "WhiteKey_A0";
-            _lastKey = "WhiteKey_C8";
-        }
-        else if (pianoOption == "reduced")
-        {
-            _firstKey = "WhiteKey_C3";
-            _lastKey = "WhiteKey_C5";
+            case "reduced":
+                _firstKey = "WhiteKey_C3";
+                _lastKey = "WhiteKey_C5";
+                break;
+            case "keyboard":
+                _firstKey = "WhiteKey_C1";
+                _lastKey = "WhiteKey_C6";
+                break;
+            default:
+                _firstKey = "WhiteKey_A0";
+                _lastKey = "WhiteKey_C8";
+                break;
         }
         LoadSelectedPiano(_firstKey, _lastKey);
     }
