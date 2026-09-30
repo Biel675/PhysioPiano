@@ -15,3 +15,4 @@ EditorBuildSettings:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 61e3671125b7af944afe3ee40a419014, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 9e782223c0b482b4a937bd02302449a9, type: 2}
+    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: ef7390b672a49694dad4c738d6f05fed, type: 2}
