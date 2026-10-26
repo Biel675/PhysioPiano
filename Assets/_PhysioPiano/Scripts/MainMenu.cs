@@ -47,17 +47,6 @@ public class MainMenu : MonoBehaviour
         ShowMainMenu();
     }
 
-    public void OnClickPractice()
-    {
-        SceneManager.LoadScene(PIANO_SCENE_NAME);
-    }
-
-    public void OnClickSelectSongs()
-    {
-        mainMenu.SetActive(false);
-        selectSongMenu.SetActive(true);
-    }
-
     public void OnClickSelectPiano()
     {
         mainMenu.SetActive(false);
@@ -76,15 +65,6 @@ public class MainMenu : MonoBehaviour
         Config.INSTANCE.PianoConfiguration = "reduced";
         selectPianoMenu.SetActive(false);
         mainMenu.SetActive(true);
-    }
-
-    public void OnClickQuit()
-    {
-        #if UNITY_EDITOR
-            EditorApplication.isPlaying = false;
-        #else
-            Application.Quit();
-        #endif
     }
 
     public void OnClickBackToMainMenu()
